@@ -1,0 +1,61 @@
+.header {
+  display: flex;
+  justify-content: center;
+  height: 283px;
+  background-color: #17171A;
+  margin-bottom: 4rem;
+}
+
+.nav {
+  display: grid;
+  width: 100%;
+  max-width: 1216px;
+  height: 283px;
+  color: white;
+  text-align: center;
+  margin: 0px 40px;
+  margin-bottom: 4.5rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.logo {
+  display: inline-block;
+  text-decoration: none;
+  margin-top: 2rem;
+  font-family: Space Grotesk, Arial;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #FFF;  
+  grid-column: 2;
+  place-self: center start;
+}
+
+.peachText {
+  display: inline-block;
+  text-decoration: none;
+  margin-top: 2rem;
+  font-family: Space Grotesk, Arial;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #E07B67;  
+  grid-column: 1;
+  place-self: center end;
+}
+
+.searchBar {
+  font-family: Inter, Arial;
+  font-size: 20px;
+  font-weight: 500;
+  height: 50px;
+  color: #AFABB6;
+  background: #202024;
+  border: 2px solid #252529;
+  border-radius: 6px;
+  grid-column: 1 / -1;
+  margin: 10px 0px;
+  padding: 0px 30px;
+}
