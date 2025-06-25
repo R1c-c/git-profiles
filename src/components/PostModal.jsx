@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './PostModal.module.css';
 
-const PostModal = ({ post, isActive, close }) => {
+const PostModal = ({ post, isActive, close, date }) => {
   const handleClick = (event) => {
     if (event.target === event.currentTarget) {
       close();
@@ -18,7 +18,9 @@ const PostModal = ({ post, isActive, close }) => {
         <p className={styles.likeButton}>like</p>
         <div className={styles.boxUpperPart}>
           <h2 className={styles.title}>{post.titulo}</h2>
-          <p className={styles.date}>{post.data}</p>
+          <p className={styles.date}>
+            {date.day} de {date.month}, {date.year}
+          </p>
         </div>
         <p className={styles.content}>{post.conteudo}</p>
       </div>
