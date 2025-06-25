@@ -16,7 +16,7 @@
 }
 
 .modal {
-  background: #17171A;
+  background: #17171a;
   height: 720px;
   max-width: 1180px;
   width: 100%;
@@ -24,7 +24,7 @@
   border-radius: 8px;
   display: grid;
   grid-template-columns: 2fr 2fr;
-  grid-template-rows: .1fr 1fr 0.1fr;
+  grid-template-rows: 0.1fr 1fr 0.1fr;
   margin: 0px 40px;
 }
 
@@ -49,7 +49,7 @@
   font-family: Inter, Arial;
   font-size: 16px;
   font-weight: 500;
-  color: #E07B67;
+  color: #e07b67;
   margin: 2rem 1.5rem;
   margin-bottom: 0px;
 }
@@ -58,7 +58,7 @@
   font-family: Space Grotesk, Helvetica;
   font-size: 24px;
   font-weight: 500;
-  color: #FFF;
+  color: #fff;
   margin: 2rem 1.5rem;
   margin-bottom: 0px;
 }
@@ -70,7 +70,7 @@
   line-height: 160%;
   margin: 20px 20px;
   margin-bottom: 0px;
-  color: #AFABB6;
+  color: #afabb6;
   overflow-y: scroll;
   height: auto;
 }
@@ -85,17 +85,17 @@
 @media (max-width: 770px) {
   .modal {
     grid-template-columns: 3fr 1fr;
-    grid-template-rows: .5fr 6fr 1fr
+    grid-template-rows: 0.5fr 6fr 1fr;
   }
   .date {
     font-size: 12px;
   }
 
-  .title{
+  .title {
     font-size: 20px;
   }
 
-  .content{
+  .content {
     font-size: 12px;
     height: auto;
   }
