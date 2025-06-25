@@ -1,7 +1,7 @@
-import React from 'react'
-import styles from './PostModal.module.css'
+import React from 'react';
+import styles from './PostModal.module.css';
 
-const PostModal = ({post, isActive, close}) => {
+const PostModal = ({ post, isActive, close }) => {
   const handleClick = (event) => {
     if (event.target === event.currentTarget) {
       close();
@@ -9,7 +9,10 @@ const PostModal = ({post, isActive, close}) => {
   };
 
   return (
-    <section className={`${isActive ? styles.modalContainer  : styles.inactive }`} onClick={handleClick} >
+    <section
+      className={`${isActive ? styles.modalContainer : styles.inactive}`}
+      onClick={handleClick}
+    >
       <div className={styles.modal}>
         <img className={styles.thumbnail} src={post.imagem_capa}></img>
         <p className={styles.likeButton}>like</p>
@@ -20,7 +23,7 @@ const PostModal = ({post, isActive, close}) => {
         <p className={styles.content}>{post.conteudo}</p>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default PostModal
+export default PostModal;
