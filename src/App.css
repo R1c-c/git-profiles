@@ -1,3 +1,18 @@
+:root {
+  font-family: Space Grotesk, Inter, Arial, sans-serif;
+  background-color: #121214;
+}
+
+body {
+  margin: 0;
+}
+
+button {
+  width: fit-content;
+  background: transparent;
+  border: none;
+}
+
 .posts {
   margin-bottom: 80px;
 }

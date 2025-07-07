@@ -81,6 +81,7 @@
   color: white;
   margin: 0px 20px;
   place-self: center start;
+  cursor: pointer;
 }
 
 @media (max-width: 770px) {

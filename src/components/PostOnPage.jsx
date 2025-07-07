@@ -2,9 +2,18 @@ import React from 'react';
 import PostItem from './PostItem';
 
 async function fetchPost(url) {
-  const postsResponse = await fetch(url);
-  const postsJSON = await postsResponse.json();
-  return postsJSON;
+  try {
+    const postsResponse = await fetch(url);
+
+    if (!postsResponse.ok) {
+      console.error('Houve um erro durante a requisição.', postsResponse.statusText)
+    }
+
+    const postsJSON = await postsResponse.json();
+    return postsJSON;
+  } catch (e) {
+    throw new Error(e.message)
+  }
 }
 
 const PostOnPage = ({ searchInput }) => {
@@ -15,8 +24,7 @@ const PostOnPage = ({ searchInput }) => {
       setPosts(fetchedPosts);
     };
     getPosts();
-  }),
-    [];
+  }, [])
 
   return posts.map((post, index) =>
     post.titulo.toLowerCase().includes(searchInput.toLowerCase()) ||

@@ -1,13 +1,14 @@
 import React from 'react';
-import styles from './PostOnPage.module.css';
+import styles from './css/PostOnPage.module.css';
 import PostModal from './PostModal';
+import Like from './Like.jsx';
 
 const PostItem = ({ post }) => {
   const [highlight, setHighlight] = React.useState(false);
   const [isActive, setIsActive] = React.useState(false);
   const postData = post;
 
-  const activateModal = () => {
+  const activateModal = (event) => {
     setIsActive(true);
   };
 
@@ -56,7 +57,7 @@ const PostItem = ({ post }) => {
           <p className={styles.date}>
             {extractedDate.day} de {extractedDate.month}, {extractedDate.year}
           </p>
-          <p className={styles.likeButton}>like</p>
+          <Like id={post.id} style={styles.likeButton}/>
         </div>
         <h2 className={styles.postTitle}>{post.titulo}</h2>
         <p className={styles.postPreview}>{extractedPreview}...</p>
