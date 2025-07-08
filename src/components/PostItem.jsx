@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './css/PostOnPage.module.css';
 import PostModal from './PostModal';
 import Like from './Like.jsx';
+import styles from './css/PostItem.module.css';
 
 const PostItem = ({ post }) => {
   const [highlight, setHighlight] = React.useState(false);

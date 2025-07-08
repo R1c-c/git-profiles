@@ -1,22 +1,22 @@
 import React from 'react';
-import Header from './components/Header.jsx';
-import PostOnPage from './components/PostOnPage.jsx';
 import { GlobalPosts } from './components/GlobalPosts.jsx';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './components/Home.jsx'
+import Fav from './components/Fav.jsx'
 import './App.css';
 
+
 const App = () => {
-  const [searchInput, setSearchInput] = React.useState('');
 
   return (
-    <div>
-      <Header searchInput={searchInput} setSearchInput={setSearchInput} />
-      <GlobalPosts>  
-        <section className="posts">
-          <PostOnPage searchInput={searchInput} />
-        </section>
-      </GlobalPosts>
-
-    </div>
+    <GlobalPosts>  
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />}/>
+          <Route path="/favorites" element={<Fav />}/>    
+        </Routes>
+      </BrowserRouter>
+    </GlobalPosts>
   );
 };
 
