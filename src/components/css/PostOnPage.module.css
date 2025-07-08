@@ -38,7 +38,8 @@
   display: block;
   color: white;
   margin: 0px;
-  place-self: end end
+  place-self: end end;
+  cursor: pointer;
 }
 
 .postTitle{
@@ -72,7 +73,7 @@
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 550px) {
   .date {
     font-size: 12px;
   }

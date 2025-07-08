@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './components/Header.jsx';
 import PostOnPage from './components/PostOnPage.jsx';
+import { GlobalPosts } from './components/GlobalPosts.jsx';
 import './App.css';
 
 const App = () => {
@@ -9,9 +10,12 @@ const App = () => {
   return (
     <div>
       <Header searchInput={searchInput} setSearchInput={setSearchInput} />
-      <section className="posts">
-        <PostOnPage searchInput={searchInput} />
-      </section>
+      <GlobalPosts>  
+        <section className="posts">
+          <PostOnPage searchInput={searchInput} />
+        </section>
+      </GlobalPosts>
+
     </div>
   );
 };
