@@ -2,19 +2,12 @@ import React from 'react';
 import PostModal from './PostModal';
 import Like from './Like.jsx';
 import styles from './css/PostItem.module.css';
+import { GlobalContext } from './GlobalPosts.jsx';
 
 const PostItem = ({ post }) => {
   const [highlight, setHighlight] = React.useState(false);
-  const [isActive, setIsActive] = React.useState(false);
+  const {isActive, setIsActive, activateModal, deactivateModal} = React.useContext(GlobalContext);
   const postData = post;
-
-  const activateModal = (event) => {
-    setIsActive(true);
-  };
-
-  const deactivateModal = () => {
-    setIsActive(false);
-  };
 
   const extractDate = () => {
     const monthList = [

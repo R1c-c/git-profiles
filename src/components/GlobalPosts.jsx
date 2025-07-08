@@ -8,6 +8,7 @@ export const GlobalPosts = ({ children }) => {
   /* Cria uma variavel likePostsStorage que guarda uma array com os ids dos posts curtidos */
 
   const [searchInput, setSearchInput] = React.useState('');
+  const [isActive, setIsActive] = React.useState(false);
 
   const [likedPosts, setLikedPosts] = React.useState([]);
   /* Cria um estado reativo para os posts curtidos na variavel likedPosts */
@@ -27,6 +28,15 @@ export const GlobalPosts = ({ children }) => {
     }
   }
 
+  const activateModal = (event) => {
+    setIsActive(true);
+  };
+
+  const deactivateModal = () => {
+    setIsActive(false);
+  };
+
+
   React.useEffect(() => {
       if (!likedPostsStorage) return;
       setLikedPosts(JSON.parse(likedPostsStorage));
@@ -43,7 +53,7 @@ export const GlobalPosts = ({ children }) => {
     /* Ela define likedPosts como o conteúdo de Newlist e sobrescreve o que estiver no item do localStorage 'likedPostsStorage' com o conteúdo da NewList transformada em String*/
 
   return (
-    <GlobalContext.Provider value={{likedPosts, updateLikedPosts, fetchPost, searchInput, setSearchInput}}>
+    <GlobalContext.Provider value={{likedPosts, updateLikedPosts, fetchPost, searchInput, setSearchInput, isActive, setIsActive, activateModal, deactivateModal}}>
       {children}
     </GlobalContext.Provider>
   )
