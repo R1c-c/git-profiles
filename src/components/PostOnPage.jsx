@@ -6,21 +6,14 @@ import styles from './css/PostOnPage.module.css';
 
 const PostOnPage = ({ searchInput, favorites }) => {
   const [posts, setPosts] = React.useState([]);
-  const {fetchPost, likedPosts} = React.useContext(GlobalContext)
+  const {postsStorage, likedPosts} = React.useContext(GlobalContext)
 
-  React.useEffect(() => {
-    const getPosts = async () => {
-      const fetchedPosts = await fetchPost('./posts/posts.json');
-      setPosts(fetchedPosts);
-    };
-    getPosts();
-  }, [])
 
   if(favorites){
-    const favPosts = posts.filter((post, index) => {
-      return likedPosts.includes(index+1);
+    const favPosts = postsStorage.filter((post, index) => {
+      return likedPosts.includes(index);
     })
-    const favPostsOnScreen = posts.filter((post) => {
+    const favPostsOnScreen = favPosts.filter((post) => {
       return post.titulo.toLowerCase().includes(searchInput.toLowerCase()) || post.conteudo.toLowerCase().includes(searchInput.toLowerCase()) 
     })
     if(favPostsOnScreen.length !== 0) {
@@ -39,7 +32,7 @@ const PostOnPage = ({ searchInput, favorites }) => {
     }
 
   } else {
-    const postsOnScreen = posts.filter((post) => {
+    const postsOnScreen = postsStorage.filter((post) => {
       return post.titulo.toLowerCase().includes(searchInput.toLowerCase()) || post.conteudo.toLowerCase().includes(searchInput.toLowerCase()) 
     })
 

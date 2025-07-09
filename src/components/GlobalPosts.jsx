@@ -1,10 +1,24 @@
 import React from 'react'
 import GlobalModal from './GlobalModal';
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_ANON_KEY);
 
 export const GlobalContext = React.createContext(); 
 /* Cria o contexto Global Context */
 
 export const GlobalPosts = ({ children }) => {
+  const [postsStorage, setPostsStorage] = React.useState([]);
+
+  React.useEffect(() => {
+    getPosts();
+  }, []);
+
+  async function getPosts() {
+    const { data } = await supabase.from('posts').select();
+    setPostsStorage(data);
+  }
+
   const likedPostsStorage = window.localStorage.getItem('likedPostsStorage');
   /* Cria uma variavel likePostsStorage que guarda uma array com os ids dos posts curtidos */
 
@@ -14,21 +28,6 @@ export const GlobalPosts = ({ children }) => {
 
   const [likedPosts, setLikedPosts] = React.useState([]);
   /* Cria um estado reativo para os posts curtidos na variavel likedPosts */
-
-  async function fetchPost(url) {
-    try {
-      const postsResponse = await fetch(url);
-
-      if (!postsResponse.ok) {
-        console.error('Houve um erro durante a requisição.', postsResponse.statusText)
-      }
-
-      const postsJSON = await postsResponse.json();
-      return postsJSON;
-    } catch (e) {
-      throw new Error(e.message)
-    }
-  }
 
   const activateModal = (event) => {
     setIsActive(true);
@@ -61,7 +60,7 @@ export const GlobalPosts = ({ children }) => {
     <GlobalContext.Provider value={{
       likedPosts, 
       updateLikedPosts, 
-      fetchPost, 
+      postsStorage, 
       searchInput, 
       setSearchInput, 
       isActive, 
