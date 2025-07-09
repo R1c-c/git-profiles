@@ -1,4 +1,5 @@
 import React from 'react'
+import GlobalModal from './GlobalModal';
 
 export const GlobalContext = React.createContext(); 
 /* Cria o contexto Global Context */
@@ -9,6 +10,7 @@ export const GlobalPosts = ({ children }) => {
 
   const [searchInput, setSearchInput] = React.useState('');
   const [isActive, setIsActive] = React.useState(false);
+  const [activePost, setActivePost] = React.useState(null)
 
   const [likedPosts, setLikedPosts] = React.useState([]);
   /* Cria um estado reativo para os posts curtidos na variavel likedPosts */
@@ -36,6 +38,9 @@ export const GlobalPosts = ({ children }) => {
     setIsActive(false);
   };
 
+  const handleActivePost = (post) => {
+    setActivePost(post)
+  }
 
   React.useEffect(() => {
       if (!likedPostsStorage) return;
@@ -53,8 +58,25 @@ export const GlobalPosts = ({ children }) => {
     /* Ela define likedPosts como o conteúdo de Newlist e sobrescreve o que estiver no item do localStorage 'likedPostsStorage' com o conteúdo da NewList transformada em String*/
 
   return (
-    <GlobalContext.Provider value={{likedPosts, updateLikedPosts, fetchPost, searchInput, setSearchInput, isActive, setIsActive, activateModal, deactivateModal}}>
-      {children}
+    <GlobalContext.Provider value={{
+      likedPosts, 
+      updateLikedPosts, 
+      fetchPost, 
+      searchInput, 
+      setSearchInput, 
+      isActive, 
+      setIsActive, 
+      activateModal, 
+      deactivateModal,
+      handleActivePost
+    }}>
+      <>
+        {children}
+        {
+          activePost &&
+          <GlobalModal post={activePost} />
+        }
+      </>
     </GlobalContext.Provider>
   )
 };

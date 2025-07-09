@@ -3,7 +3,7 @@ import { GlobalContext } from './GlobalPosts.jsx';
 import Header from './Header.jsx';
 import PostOnPage from './PostOnPage.jsx';
 
-const Home = () => {
+const Favorite = () => {
   const {searchInput, setSearchInput} = React.useContext(GlobalContext);
   return (
     <div>          
@@ -15,4 +15,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Favorite
