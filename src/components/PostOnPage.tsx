@@ -1,6 +1,6 @@
 import React from 'react';
-import { GlobalContext } from './GlobalPosts.jsx';
-import PostItem from './PostItem';
+import { GlobalContext } from './GlobalPosts.js';
+import PostItem from './PostItem.js';
 import styles from './css/PostOnPage.module.css';
 
 

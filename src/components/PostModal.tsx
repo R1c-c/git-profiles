@@ -1,6 +1,6 @@
 import styles from './css/PostModal.module.css';
-import Like from './Like.jsx';
-import { useDate } from '../useDate.jsx';
+import Like from './Like.js';
+import { useDate } from '../useDate.js';
 
 const PostModal = ({ post, isActive, close }) => {
   const handleClick = (event) => {

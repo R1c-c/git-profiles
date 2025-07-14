@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import styles from './css/PostModal.module.css';
-import Like from './Like.jsx';
-import { useDate } from '../useDate.jsx';
-import { GlobalContext } from './GlobalPosts.jsx';
+import Like from './Like.js';
+import { useDate } from '../useDate.js';
+import { GlobalContext } from './GlobalPosts.js';
 
 const GlobalModal = ({ post }) => {
   const handleClick = (event) => {

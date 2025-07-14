@@ -1,9 +1,9 @@
 import React from 'react';
 // import PostModal from './PostModal';
-import Like from './Like.jsx';
+import Like from './Like.js';
 import styles from './css/PostItem.module.css';
-import { GlobalContext } from './GlobalPosts.jsx';
-import { useDate } from '../useDate.jsx';
+import { GlobalContext } from './GlobalPosts.js';
+import { useDate } from '../useDate.js';
 
 const PostItem = ({ post }) => {
   const [highlight, setHighlight] = React.useState(false);

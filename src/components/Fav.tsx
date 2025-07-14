@@ -1,7 +1,7 @@
 import React from 'react'
-import { GlobalContext } from './GlobalPosts.jsx';
-import Header from './Header.jsx';
-import PostOnPage from './PostOnPage.jsx';
+import { GlobalContext } from './GlobalPosts.js';
+import Header from './Header.js';
+import PostOnPage from './PostOnPage.js';
 
 const Favorite = () => {
   const {searchInput, setSearchInput} = React.useContext(GlobalContext);
