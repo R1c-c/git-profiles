@@ -1,7 +1,8 @@
-import React from "react"
-import { GlobalContext } from "./GlobalPosts"
-import HeartFilled from "../Icons/HeartFilled"
-import HeartUnfilled from "../Icons/HeartUnfilled"
+import React from "react";
+import PostItem from './PostItem';
+import { GlobalContext } from "./GlobalPosts";
+import HeartFilled from "../Icons/HeartFilled";
+import HeartUnfilled from "../Icons/HeartUnfilled";
 
 const Like = ({id, style}) => {
   const {likedPosts, updateLikedPosts} = React.useContext(GlobalContext);
@@ -12,9 +13,9 @@ const Like = ({id, style}) => {
   React.useEffect(() => {
     const liked = likedPosts.find((item) => item === id);
     if (liked) {
-      setIsLiked(true)
+      setIsLiked(true);
     } else {
-      setIsLiked(false)
+      setIsLiked(false);
     }
   }, [likedPosts])
   /* Usa um useEffect toda vez que likedPosts mudar*/
@@ -23,7 +24,6 @@ const Like = ({id, style}) => {
 
   const handleClick = (event) => {
     event.stopPropagation();
-
     const newList = isLiked ? likedPosts.filter((item) => item !== id) : [...likedPosts, id];
     /* Guarda na variavel newList o seguinte: */
     /* Se isLiked for verdadeiro, retorna uma lista filtrada de likedPosts com só os posts diferentes do que foi clicado para remove-lo de lá */

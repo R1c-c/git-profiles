@@ -1,19 +1,23 @@
+import React, { useContext } from 'react';
 import styles from './css/PostModal.module.css';
 import Like from './Like.jsx';
 import { useDate } from '../useDate.jsx';
+import { GlobalContext } from './GlobalPosts.jsx';
 
-const PostModal = ({ post, isActive, close }) => {
+const GlobalModal = ({ post }) => {
   const handleClick = (event) => {
     if (event.target === event.currentTarget) {
-      close();
+      handleActivePost(null)
     }
   };
 
+  const {handleActivePost} = useContext(GlobalContext)
+
   const date = useDate(post.data)
 
-  return (
+  return post ? (
     <section
-      className={`${isActive ? styles.modalContainer : styles.inactive}`}
+      className={styles.modalContainer}
       onClick={handleClick}
     >
       <div className={styles.modal}>
@@ -28,7 +32,7 @@ const PostModal = ({ post, isActive, close }) => {
         <p className={styles.content}>{post.conteudo}</p>
       </div>
     </section>
-  );
+  ) : <></>;
 };
 
-export default PostModal;
+export default GlobalModal;

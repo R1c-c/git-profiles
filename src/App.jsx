@@ -1,22 +1,34 @@
 import React from 'react';
-import Header from './components/Header.jsx';
-import PostOnPage from './components/PostOnPage.jsx';
 import { GlobalPosts } from './components/GlobalPosts.jsx';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { createClient } from '@supabase/supabase-js';
+import Home from './components/Home.jsx'
+import Fav from './components/Fav.jsx'
 import './App.css';
 
+const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_ANON_KEY);
+
 const App = () => {
-  const [searchInput, setSearchInput] = React.useState('');
+  const [posts, setPosts] = React.useState([]);
+
+  React.useEffect(() => {
+    getPosts();
+  }, []);
+
+  async function getPosts() {
+    const { data } = await supabase.from('posts').select();
+    setPosts(data);
+  }
 
   return (
-    <div>
-      <Header searchInput={searchInput} setSearchInput={setSearchInput} />
-      <GlobalPosts>  
-        <section className="posts">
-          <PostOnPage searchInput={searchInput} />
-        </section>
-      </GlobalPosts>
-
-    </div>
+    <GlobalPosts>  
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />}/>
+          <Route path="/favorites" element={<Fav />}/>    
+        </Routes>
+      </BrowserRouter>
+    </GlobalPosts>
   );
 };
 
