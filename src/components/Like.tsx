@@ -1,35 +1,32 @@
 import React from "react";
-import PostItem from './PostItem';
 import { GlobalContext } from "./GlobalPosts";
 import HeartFilled from "../Icons/HeartFilled";
 import HeartUnfilled from "../Icons/HeartUnfilled";
 
-const Like = ({id, style}) => {
-  const {likedPosts, updateLikedPosts} = React.useContext(GlobalContext);
-  /* Puxa likedPosts e updateLikedPosts do GlobalContext */
+const Like = ({ id, style }: { id: number, style: string}) => {
+  const {likedPostsStorage, updateLikedPostsStorage} = React.useContext(GlobalContext);
   const [isLiked, setIsLiked] = React.useState(false);
-  /* Define um estado reativo na variável isLiked */
 
   React.useEffect(() => {
-    const liked = likedPosts.find((item) => item === id);
+    const liked = likedPostsStorage.find((item) => item === id);
     if (liked) {
       setIsLiked(true);
     } else {
       setIsLiked(false);
     }
-  }, [likedPosts])
-  /* Usa um useEffect toda vez que likedPosts mudar*/
-  /* Guarda em liked o id de um post CASO ele seja encontrado na lista likedPosts*/
+  }, [id, likedPostsStorage])
+  /* Usa um useEffect toda vez que likedPostsStorage mudar*/
+  /* Guarda em liked o id de um post CASO ele seja encontrado na lista likedPostsStorage*/
   /* Se estiver na lista, define isLiked como verdadeiro, se não, define como falso */
 
-  const handleClick = (event) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    const newList = isLiked ? likedPosts.filter((item) => item !== id) : [...likedPosts, id];
+    const newList = isLiked ? likedPostsStorage.filter((item) => item !== id) : [...likedPostsStorage, id];
     /* Guarda na variavel newList o seguinte: */
-    /* Se isLiked for verdadeiro, retorna uma lista filtrada de likedPosts com só os posts diferentes do que foi clicado para remove-lo de lá */
-    /* Se isLiked for falso, retorna likedPosts com o post atual adicionado */
+    /* Se isLiked for verdadeiro, retorna uma lista filtrada de likedPostsStorage com só os posts diferentes do que foi clicado para remove-lo de lá */
+    /* Se isLiked for falso, retorna likedPostsStorage com o post atual adicionado */
 
-    updateLikedPosts(newList)
+    updateLikedPostsStorage(newList)
     /* Guarda newList no localStorage */
   }
 

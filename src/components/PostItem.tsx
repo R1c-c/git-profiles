@@ -4,8 +4,9 @@ import Like from './Like.js';
 import styles from './css/PostItem.module.css';
 import { GlobalContext } from './GlobalPosts.js';
 import { useDate } from '../useDate.js';
+import type { Post } from '../typings/typings.js';
 
-const PostItem = ({ post }) => {
+const PostItem = ({ post }: { post: Post}) => {
   const [highlight, setHighlight] = React.useState(false);
   const {handleActivePost} = React.useContext(GlobalContext);
   const extractedPreview = post.conteudo.slice(0, 80);

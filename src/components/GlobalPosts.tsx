@@ -1,71 +1,80 @@
 import React from 'react'
 import GlobalModal from './GlobalModal';
 import { createClient } from '@supabase/supabase-js';
+import { type GlobalPostsType, type Post } from '../typings/typings';
 
 const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_ANON_KEY);
 
-export const GlobalContext = React.createContext(); 
+export const GlobalContext = React.createContext<GlobalPostsType>({
+    searchInput: '', 
+    posts: [], 
+    activePost: null,
+    isActive: false, 
+    likedPostsStorage: [],
+    setSearchInput: () => {}, 
+    setPosts: () => {},
+    setActivePost: () => {},
+    setIsActive: () => {}, 
+    updateLikedPostsStorage: () => {}, 
+    handleActivePost: () => {},
+}); 
 
-export const GlobalPosts = ({ children }) => {
-  const [postsStorage, setPostsStorage] = React.useState([]);
+export const GlobalPosts = ({ children }: { children: React.ReactNode }) => {
+  const [searchInput, setSearchInput] = React.useState<string>('');
+  const [posts, setPosts] = React.useState<Post[]>([]);
+  const [likedPostsStorage, setLikedPostsStorage] = React.useState<number[]>([]);
+  const [activePost, setActivePost] = React.useState<Post | null>(null);
+  const [isActive, setIsActive] = React.useState<boolean>(false);
+
+  const likedPosts = window.localStorage.getItem('likedPosts');
+
+  async function getPosts() {
+    const { data, error } = await supabase.from('posts').select();
+
+    if (error) {
+      console.error('Erro ao buscar posts:', error);
+      return;
+    }
+
+    if (data) {
+      setPosts(data as Post[]);
+    }
+  }
 
   React.useEffect(() => {
     getPosts();
   }, []);
 
-  async function getPosts() {
-    const { data } = await supabase.from('posts').select();
-    setPostsStorage(data);
-  }
-
-  const likedPostsStorage = window.localStorage.getItem('likedPostsStorage');
-  /* Cria uma variavel likePostsStorage que guarda uma array com os ids dos posts curtidos */
-
-  const [searchInput, setSearchInput] = React.useState('');
-  const [isActive, setIsActive] = React.useState(false);
-  const [activePost, setActivePost] = React.useState(null)
-
-  const [likedPosts, setLikedPosts] = React.useState([]);
-  /* Cria um estado reativo para os posts curtidos na variavel likedPosts */
-
-  const activateModal = (event) => {
-    setIsActive(true);
-  };
-
-  const deactivateModal = () => {
-    setIsActive(false);
-  };
-
-  const handleActivePost = (post) => {
+  const handleActivePost = (post: Post | null) => {
     setActivePost(post)
   }
 
   React.useEffect(() => {
-      if (!likedPostsStorage) return;
-      setLikedPosts(JSON.parse(likedPostsStorage));
+      if (!likedPosts) return;
+      setLikedPostsStorage(JSON.parse(likedPosts));
     }, [])
-    /* Usa um useEffect que é ativado toda vez que esse código se repete */
-    /* Checa se likedPostsStorage é uma lista vazia*/
-    /* Se sim, não faz nada. Se não, transforma likedPostsStorage em um objeto e o guarda em likedPosts */
+    /* Checa se likedPosts é uma lista vazia*/
+    /* Se sim, não faz nada. Se não, transforma likedPosts em um objeto e o guarda em likedPostsStorage */
 
-    const updateLikedPosts = (newList) => {
-      setLikedPosts(newList);
-      window.localStorage.setItem('likedPostsStorage', JSON.stringify(newList))
+    const updateLikedPostsStorage = (newList: number[]) => {
+      setLikedPostsStorage(newList);
+      window.localStorage.setItem('likedPosts', JSON.stringify(newList))
     }
-    /* Uma função chamada updateLikedPosts que leva como newList como parâmetro */
-    /* Ela define likedPosts como o conteúdo de Newlist e sobrescreve o que estiver no item do localStorage 'likedPostsStorage' com o conteúdo da NewList transformada em String*/
+    /* Uma função chamada updateLikedPostsStorage que leva como newList como parâmetro */
+    /* Ela define likedPostsStorage como o conteúdo de Newlist e sobrescreve o que estiver no item do localStorage 'likedPosts' com o conteúdo da NewList transformada em String*/
 
   return (
     <GlobalContext.Provider value={{
-      likedPosts, 
-      updateLikedPosts, 
-      postsStorage, 
       searchInput, 
-      setSearchInput, 
+      posts, 
+      activePost,
       isActive, 
+      likedPostsStorage, 
+      setSearchInput, 
+      setPosts,
+      setActivePost,
       setIsActive, 
-      activateModal, 
-      deactivateModal,
+      updateLikedPostsStorage, 
       handleActivePost
     }}>
       <>

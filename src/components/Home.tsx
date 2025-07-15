@@ -9,7 +9,7 @@ const Home = () => {
     <div>          
       <Header searchInput={searchInput} setSearchInput={setSearchInput} />
       <section className="posts">
-        <PostOnPage searchInput={searchInput} />
+        <PostOnPage/>
       </section>
     </div>
   )

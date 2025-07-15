@@ -9,7 +9,7 @@ const Favorite = () => {
     <div>          
       <Header searchInput={searchInput} setSearchInput={setSearchInput} />
       <section className="posts">
-        <PostOnPage searchInput={searchInput} favorites={true}/>
+        <PostOnPage favorites={true}/>
       </section>
     </div>
   )

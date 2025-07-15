@@ -1,6 +1,6 @@
 import styles from './css/Header.module.css';
 
-const Header = ({ searchInput, setSearchInput }) => {
+const Header = ({ searchInput, setSearchInput }: { searchInput: string, setSearchInput: React.Dispatch<React.SetStateAction<string>> }) => {
   return (
     <section className={styles.header}>
       <div className={styles.nav}>

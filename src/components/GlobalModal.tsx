@@ -3,17 +3,17 @@ import styles from './css/PostModal.module.css';
 import Like from './Like.js';
 import { useDate } from '../useDate.js';
 import { GlobalContext } from './GlobalPosts.js';
+import type { Post } from '../typings/typings.js';
 
-const GlobalModal = ({ post }) => {
-  const handleClick = (event) => {
-    if (event.target === event.currentTarget) {
-      handleActivePost(null)
+const GlobalModal = ({ post }: { post: Post | null }) => {
+  const date = useDate(post?.data)
+  const {handleActivePost} = useContext(GlobalContext)
+  
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+  if (event.target === event.currentTarget) {
+    handleActivePost(null)
     }
   };
-
-  const {handleActivePost} = useContext(GlobalContext)
-
-  const date = useDate(post.data)
 
   return post ? (
     <section
