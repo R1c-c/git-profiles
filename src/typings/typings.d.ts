@@ -16,6 +16,6 @@ export interface GlobalPostsType {
     setPosts: React.Dispatch<React.SetStateAction<Post[]>>,
     setActivePost: React.Dispatch<React.SetStateAction<Post | null>>,
     setIsActive: React.Dispatch<React.SetStateAction<boolean>>, 
-    updateLikedPostsStorage: eact.Dispatch<React.SetStateAction<number[]>>, 
+    updateLikedPostsStorage: (newlist: number[]) => void,
     handleActivePost: (post: Post | null) => void,
   }

@@ -1,7 +1,7 @@
 import React from 'react'
 import GlobalModal from './GlobalModal';
 import { createClient } from '@supabase/supabase-js';
-import { type GlobalPostsType, type Post } from '../typings/typings';
+import type { GlobalPostsType, Post } from '../typings/typings';
 
 const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_ANON_KEY);
 
