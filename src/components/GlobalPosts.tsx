@@ -1,9 +1,9 @@
-import React from 'react'
-import GlobalModal from './GlobalModal';
-import { createClient } from '@supabase/supabase-js';
-import type { GlobalPostsType, Post } from '../typings/typings';
+import React, { useEffect, useState } from 'react'
+import { type Session } from '@supabase/supabase-js'
+import { supabase } from '../utils/supabase';
 
-const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_ANON_KEY);
+import GlobalModal from './GlobalModal';
+import type { GlobalPostsType, Post } from '../typings/typings';
 
 export const GlobalContext = React.createContext<GlobalPostsType>({
     searchInput: '', 
@@ -17,19 +17,34 @@ export const GlobalContext = React.createContext<GlobalPostsType>({
     setIsActive: () => {}, 
     updateLikedPostsStorage: () => {}, 
     handleActivePost: () => {},
+    session: null
 }); 
 
-export const GlobalPosts = ({ children }: { children: React.ReactNode }) => {
+export const GlobalPosts = ({ children }: { children: React.ReactNode}) => {
   const [searchInput, setSearchInput] = React.useState<string>('');
   const [posts, setPosts] = React.useState<Post[]>([]);
   const [likedPostsStorage, setLikedPostsStorage] = React.useState<number[]>([]);
   const [activePost, setActivePost] = React.useState<Post | null>(null);
   const [isActive, setIsActive] = React.useState<boolean>(false);
 
+  const [session, setSession] = useState<Session | null>(null)
+  useEffect(() => { 
+    supabase.auth.getSession().then(({ data: { session } }) => 
+      { setSession(session) })      
+    const { data: { subscription }, } = supabase.auth.onAuthStateChange((_event, session) => { 
+      setSession(session) 
+    })      
+  return () => subscription.unsubscribe() 
+
+  }, [])
+
+
   const likedPosts = window.localStorage.getItem('likedPosts');
 
   async function getPosts() {
     const { data, error } = await supabase.from('posts').select();
+
+    console.log('data: ', data)
 
     if (error) {
       console.error('Erro ao buscar posts:', error);
@@ -52,7 +67,7 @@ export const GlobalPosts = ({ children }: { children: React.ReactNode }) => {
   React.useEffect(() => {
       if (!likedPosts) return;
       setLikedPostsStorage(JSON.parse(likedPosts));
-    }, [])
+    }, [likedPosts])
     /* Checa se likedPosts é uma lista vazia*/
     /* Se sim, não faz nada. Se não, transforma likedPosts em um objeto e o guarda em likedPostsStorage */
 
@@ -75,7 +90,8 @@ export const GlobalPosts = ({ children }: { children: React.ReactNode }) => {
       setActivePost,
       setIsActive, 
       updateLikedPostsStorage, 
-      handleActivePost
+      handleActivePost,
+      session
     }}>
       <>
         {children}
