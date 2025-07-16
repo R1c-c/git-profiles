@@ -1,23 +1,24 @@
 import React from 'react';
-import { GlobalContext } from './GlobalPosts.jsx';
-import PostItem from './PostItem';
-import styles from './css/PostOnPage.module.css';
+import { GlobalContext } from './GlobalPosts.js';
+import PostItem from './PostItem.js';
 
 
-const PostOnPage = ({ searchInput, favorites }) => {
-  const [posts, setPosts] = React.useState([]);
-  const {postsStorage, likedPosts} = React.useContext(GlobalContext)
+const PostOnPage = ({ favorites }: { favorites?: boolean }) => {
+  const {posts, searchInput, likedPostsStorage} = React.useContext(GlobalContext)
 
 
   if(favorites){
-    const favPosts = postsStorage.filter((post, index) => {
-      return likedPosts.includes(index);
+    const favPosts = posts.filter((post) => {
+      return likedPostsStorage.includes(post.id);
     })
     const favPostsOnScreen = favPosts.filter((post) => {
       return post.titulo.toLowerCase().includes(searchInput.toLowerCase()) || post.conteudo.toLowerCase().includes(searchInput.toLowerCase()) 
     })
     if(favPostsOnScreen.length !== 0) {
       if(favPosts.length !== 0){
+
+        console.log(likedPostsStorage)
+        
         return favPosts.map((post, index) =>
           post.titulo.toLowerCase().includes(searchInput.toLowerCase()) ||
           post.conteudo.toLowerCase().includes(searchInput.toLowerCase()) ? (
@@ -32,7 +33,7 @@ const PostOnPage = ({ searchInput, favorites }) => {
     }
 
   } else {
-    const postsOnScreen = postsStorage.filter((post) => {
+    const postsOnScreen = posts.filter((post) => {
       return post.titulo.toLowerCase().includes(searchInput.toLowerCase()) || post.conteudo.toLowerCase().includes(searchInput.toLowerCase()) 
     })
 
