@@ -2,8 +2,8 @@ import { useState } from "react"
 import { supabase } from "../utils/supabase"
 
 const Login = () => {
- const [email, setEmail] = useState('')
- const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
   const [loading, setLoading] = useState(false)

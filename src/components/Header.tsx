@@ -50,9 +50,15 @@ const Header = ({ searchInput, setSearchInput }: { searchInput: string, setSearc
               </NavLink>
             }
             {
+              session && 
+              <NavLink to="/posting" className={styles.link}>
+                Post
+              </NavLink>
+            }
+            {
               session ? 
               <>
-                <div>Bem vindo, {session.user.email}</div>
+                <div className={styles.welcomeMsg}>Bem vindo, {session.user.email}</div>
                 <Logout />
               </>
               :
