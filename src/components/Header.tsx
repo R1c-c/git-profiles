@@ -31,7 +31,7 @@ import { useContext } from 'react';
 import Logout from './Logout';
 
 const Header = ({ searchInput, setSearchInput }: { searchInput: string, setSearchInput: React.Dispatch<React.SetStateAction<string>> }) => {
-  const {session} = useContext(GlobalContext)
+  const { session } = useContext(GlobalContext)
 
   return (
     <section className={styles.header}>
@@ -44,30 +44,30 @@ const Header = ({ searchInput, setSearchInput }: { searchInput: string, setSearc
 
           <div className={styles.linksContainer}>
             {
-              session && 
+              session &&
               <NavLink to="/favorites" className={styles.link}>
                 Favorites
               </NavLink>
             }
             {
-              session && 
+              session &&
               <NavLink to="/posting" className={styles.link}>
                 Post
               </NavLink>
             }
             {
-              session ? 
-              <>
-                <div className={styles.welcomeMsg}>Bem vindo, {session.user.email}</div>
-                <Logout />
-              </>
-              :
-              <NavLink to="/login" className={styles.link}>
-                Login
-              </NavLink>
+              session ?
+                <>
+                  <div className={styles.welcomeMsg}>Bem vindo, {session.user.email}</div>
+                  <Logout />
+                </>
+                :
+                <NavLink to="/login" className={styles.link}>
+                  Login
+                </NavLink>
             }
           </div>
-        </div>      
+        </div>
         <div className={styles.search}>
           <input
             className={styles.searchBar}

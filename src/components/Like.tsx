@@ -3,8 +3,8 @@ import { GlobalContext } from "./GlobalPosts";
 import HeartFilled from "../Icons/HeartFilled";
 import HeartUnfilled from "../Icons/HeartUnfilled";
 
-const Like = ({ id, style }: { id: number, style: string}) => {
-  const {likedPostsStorage, updateLikedPostsStorage} = React.useContext(GlobalContext);
+const Like = ({ id, style }: { id: number, style: string }) => {
+  const { likedPostsStorage, updateLikedPostsStorage } = React.useContext(GlobalContext);
   const [isLiked, setIsLiked] = React.useState(false);
 
   React.useEffect(() => {

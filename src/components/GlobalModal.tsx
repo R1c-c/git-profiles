@@ -7,11 +7,11 @@ import type { Post } from '../typings/typings.js';
 
 const GlobalModal = ({ post }: { post: Post | null }) => {
   const date = useDate(post?.data)
-  const {handleActivePost} = useContext(GlobalContext)
-  
+  const { handleActivePost } = useContext(GlobalContext)
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-  if (event.target === event.currentTarget) {
-    handleActivePost(null)
+    if (event.target === event.currentTarget) {
+      handleActivePost(null)
     }
   };
 
@@ -22,7 +22,7 @@ const GlobalModal = ({ post }: { post: Post | null }) => {
     >
       <div className={styles.modal}>
         <img className={styles.thumbnail} src={post.imagem_capa}></img>
-        <Like id={post.id} style={styles.likeButton}/>
+        <Like id={post.id} style={styles.likeButton} />
         <div className={styles.boxUpperPart}>
           <h2 className={styles.title}>{post.titulo}</h2>
           <p className={styles.date}>

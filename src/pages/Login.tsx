@@ -9,7 +9,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false)
 
   const handleLogin = async (e: React.MouseEvent) => {
-     e.preventDefault()
+    e.preventDefault()
     setLoading(true)
     setError(null)
 
@@ -39,7 +39,7 @@ const Login = () => {
         email,
         password,
       })
-      
+
       console.log('register data: ', data)
 
       if (error) throw error
@@ -52,13 +52,13 @@ const Login = () => {
   }
 
   return (
-    <div style={{background: "#fff", padding: "20px", display: "flex", flexDirection: "column", gap: "16px"}}>
+    <div style={{ background: "#fff", padding: "20px", display: "flex", flexDirection: "column", gap: "16px" }}>
       Login
       <div>
-        <input type="email" onChange={({target}) => {setEmail(target.value)}} />
+        <input type="email" onChange={({ target }) => { setEmail(target.value) }} />
       </div>
       <div>
-        <input type="password" onChange={({target}) => {setPassword(target.value)}} />
+        <input type="password" onChange={({ target }) => { setPassword(target.value) }} />
       </div>
       <button onClick={handleLogin} disabled={loading}>
         Entrar
