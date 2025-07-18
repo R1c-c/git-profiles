@@ -42,7 +42,7 @@ const PostOnPage = ({ favorites }: { favorites?: boolean }) => {
         <PostItem key={index} post={post} />
       );
     } else {
-      return <p>Não há posts disponíveis</p>
+      return <p className={`text-darkgray-100 text-[18px]`}>Não há posts disponíveis</p>
     }
   }
 };

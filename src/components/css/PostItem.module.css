@@ -3,7 +3,7 @@
   justify-content: center;
 }
 
-.postBox {
+/* .postBox {
   background: #17171A;
   width: 100%;
   max-width: 1216px;
@@ -11,64 +11,64 @@
   border: 2px solid #252529;
   border-radius: 8px;
   margin: 20px auto;
-}
+} */
 
-.highlighted {
-  border-color: #E07B67;
-}
+/* .highlighted {
+  border-color: #e07b67;
+} */
 
-.boxUpperPart {
+/* .boxUpperPart {
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: auto;
   margin: 40px 40px 30px 40px;
-}
+} */
 
-.date {
+/* .date {
   display: block;
   font-family: Inter, Arial;
   font-size: 16px;
   font-weight: 500;
   margin: 0px;
-  color: #E07B67;
-  place-self: end start
-}
+  color: #e07b67;
+  place-self: end start;
+} */
 
-.likeButton {
+/* .likeButton {
   display: block;
   color: white;
   margin: 0px;
   place-self: end end;
   cursor: pointer;
-}
+} */
 
-.postTitle{
+/* .postTitle {
   font-family: Space Grotesk, Helvetica;
   font-size: 24px;
   font-weight: 500;
   margin: 20px 40px;
-  color: #FFF;
-}
+  color: #fff;
+} */
 
-.postPreview{
+/* .postPreview {
   font-family: Inter, Arial;
   font-size: 20px;
   font-weight: 500;
   line-height: 160%;
   margin: 20px 40px 40px 40px;
-  color: #AFABB6;
-}
+  color: #afabb6;
+} */
 
 @media (max-width: 770px) {
   .date {
     font-size: 14px;
   }
 
-  .postTitle{
+  .postTitle {
     font-size: 20px;
   }
 
-  .postPreview{
+  .postPreview {
     font-size: 16px;
   }
 
@@ -82,11 +82,11 @@
     font-size: 12px;
   }
 
-  .postTitle{
+  .postTitle {
     font-size: 20px;
   }
 
-  .postPreview{
+  .postPreview {
     font-size: 14px;
   }
 }

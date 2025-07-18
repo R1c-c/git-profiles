@@ -1,3 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --color-peach: #e07b67;
+  --color-darkgray-100: #afabb6;
+  --color-darkgray-200: #252529;
+  --color-darkgray-300: #202024;
+  --color-darkgray-400: #17171a;
+  --color-darkgray-450: #121214;
+  --color-darkgray-500: ;
+  --color-shadow-750: rgba(0, 0, 0, 0.75);
+}
+
 :root {
   font-family: Space Grotesk, Inter, Arial, sans-serif;
   background-color: #121214;
@@ -5,15 +18,4 @@
 
 body {
   margin: 0;
-}
-
-button {
-  width: fit-content;
-  background: transparent;
-  border: none;
-}
-
-.posts {
-  margin-bottom: 80px;
-  padding: 0 16px;
 }

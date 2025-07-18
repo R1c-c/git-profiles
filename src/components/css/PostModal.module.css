@@ -1,8 +1,4 @@
-.inactive {
-  display: none;
-}
-
-.modalContainer {
+/* .modalContainer {
   height: 100vh;
   width: 100%;
   background: rgba(0, 0, 0, 0.75);
@@ -13,9 +9,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
-.modal {
+/* .modal {
   background: #17171a;
   height: 720px;
   max-width: 1180px;
@@ -26,9 +22,9 @@
   grid-template-columns: 2fr 2fr;
   grid-template-rows: 0.1fr 1fr 0.1fr;
   margin: 0px 40px;
-}
+} */
 
-.thumbnail {
+/* .thumbnail {
   grid-row: 1 / -1;
   grid-template-columns: 1;
   width: 100%;
@@ -37,15 +33,15 @@
   align-self: center;
   background: #121214;
   border-right: 2px solid #252529;
-}
+} */
 
-.boxUpperPart {
+/* .boxUpperPart {
   display: flex;
   grid-column: 2;
   grid-row: 1;
-}
+} */
 
-.date {
+/* .date {
   font-family: Inter, Arial;
   font-size: 16px;
   font-weight: 500;
@@ -53,18 +49,18 @@
   margin: 2.2rem 1.5rem;
   margin-bottom: 0px;
   width: 200px;
-}
+} */
 
-.title {
+/* .title {
   font-family: Space Grotesk, Helvetica;
   font-size: 24px;
   font-weight: 500;
   color: #fff;
   margin: 2rem 1.5rem;
   margin-bottom: 0px;
-}
+} */
 
-.content {
+/* .content {
   font-family: Inter, Arial;
   font-size: 20px;
   font-weight: 500;
@@ -74,15 +70,15 @@
   color: #afabb6;
   overflow-y: scroll;
   height: auto;
-}
+} */
 
-.likeButton {
+/* .likeButton {
   grid-row: 3;
   color: white;
   margin: 0px 20px;
   place-self: center start;
   cursor: pointer;
-}
+} */
 
 @media (max-width: 770px) {
   .modal {
