@@ -1,3 +1,5 @@
+import type { Session, SupabaseClient } from "@supabase/supabase-js";
+
 export interface Post {
     id: number,
     titulo: string,
@@ -18,4 +20,5 @@ export interface GlobalPostsType {
     setIsActive: React.Dispatch<React.SetStateAction<boolean>>, 
     updateLikedPostsStorage: (newlist: number[]) => void,
     handleActivePost: (post: Post | null) => void,
+    session: Session | null
   }

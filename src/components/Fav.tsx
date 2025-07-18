@@ -4,12 +4,12 @@ import Header from './Header.js';
 import PostOnPage from './PostOnPage.js';
 
 const Favorite = () => {
-  const {searchInput, setSearchInput} = React.useContext(GlobalContext);
+  const { searchInput, setSearchInput } = React.useContext(GlobalContext);
   return (
-    <div>          
+    <div>
       <Header searchInput={searchInput} setSearchInput={setSearchInput} />
       <section className="posts">
-        <PostOnPage favorites={true}/>
+        <PostOnPage favorites={true} />
       </section>
     </div>
   )

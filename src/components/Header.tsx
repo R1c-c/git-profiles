@@ -26,8 +26,13 @@
 
 import styles from './css/Header.module.css';
 import { NavLink } from 'react-router-dom';
+import { GlobalContext } from './GlobalPosts';
+import { useContext } from 'react';
+import Logout from './Logout';
 
 const Header = ({ searchInput, setSearchInput }: { searchInput: string, setSearchInput: React.Dispatch<React.SetStateAction<string>> }) => {
+  const { session } = useContext(GlobalContext)
+
   return (
     <section className={styles.header}>
       <div className={styles.navWrapper}>
@@ -38,14 +43,31 @@ const Header = ({ searchInput, setSearchInput }: { searchInput: string, setSearc
           </NavLink>
 
           <div className={styles.linksContainer}>
-            <NavLink to="/favorites" className={styles.link}>
-              Favorites
-            </NavLink>
-            <NavLink to="/" className={styles.link}>
-              Login
-            </NavLink>
+            {
+              session &&
+              <NavLink to="/favorites" className={styles.link}>
+                Favorites
+              </NavLink>
+            }
+            {
+              session &&
+              <NavLink to="/posting" className={styles.link}>
+                Post
+              </NavLink>
+            }
+            {
+              session ?
+                <>
+                  <div className={styles.welcomeMsg}>Bem vindo, {session.user.email}</div>
+                  <Logout />
+                </>
+                :
+                <NavLink to="/login" className={styles.link}>
+                  Login
+                </NavLink>
+            }
           </div>
-        </div>      
+        </div>
         <div className={styles.search}>
           <input
             className={styles.searchBar}
