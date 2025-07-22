@@ -8,7 +8,7 @@ const Logout = () => {
   }
 
   return (
-    <button onClick={handleLogout} style={{ color: '#E07B67', fontWeight: '500', fontSize: '16px', cursor: 'pointer' }}>Logout</button>
+    <button onClick={handleLogout} style={{ color: '#e07b67' }} className={`text-peach, font-medium text-base cursor-pointer`}>Logout</button>
   )
 }
 

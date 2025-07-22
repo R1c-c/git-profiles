@@ -23,8 +23,6 @@
 
 // export default Header;
 
-
-import styles from './css/Header.module.css';
 import { NavLink } from 'react-router-dom';
 import { GlobalContext } from './GlobalPosts';
 import { useContext } from 'react';
@@ -33,44 +31,68 @@ import Logout from './Logout';
 const Header = ({ searchInput, setSearchInput }: { searchInput: string, setSearchInput: React.Dispatch<React.SetStateAction<string>> }) => {
   const { session } = useContext(GlobalContext)
 
+  const linkStyle = 'no-underline text-white font-medium lg:text-2xl md:text-[20px]'
+
   return (
-    <section className={styles.header}>
-      <div className={styles.navWrapper}>
-        <div className={styles.nav}>
-          <NavLink to='/' end className={styles.logo}>
-            <span className={styles.peachText}>Code</span>
+    <section className={`flex justify-center bg-darkgray-400 mb-16`}>
+      <div className={`flex flex-col gap-1.5 w-full max-w-[1220px] mx-3 py-4`}>
+        <div className={`flex w-full text-white text-center items-center`}>
+          <NavLink to='/' end className={`
+            inline-block 
+            no-underline 
+            font-[Space Grotesk, Arial]
+            text-[40px]
+            text-white
+            font-medium
+            tracking-normal
+            mr-auto
+            ml-5
+            `}>
+            <span className={`text-peach`}>Code</span>
             Lab
           </NavLink>
 
-          <div className={styles.linksContainer}>
+          <div className={`flex gap-5 ml-auto`}>
             {
               session &&
-              <NavLink to="/favorites" className={styles.link}>
+              <NavLink to="/favorites" className={`${linkStyle}`}>
                 Favorites
               </NavLink>
             }
             {
               session &&
-              <NavLink to="/posting" className={styles.link}>
+              <NavLink to="/posting" className={`${linkStyle}`}>
                 Post
               </NavLink>
             }
             {
               session ?
                 <>
-                  <div className={styles.welcomeMsg}>Bem vindo, {session.user.email}</div>
+                  <div className={`w-[250px] font-medium text-start`}>Bem vindo, {session.user.email}</div>
                   <Logout />
                 </>
                 :
-                <NavLink to="/login" className={styles.link}>
+                <NavLink to="/login" className={`${linkStyle}`}>
                   Login
                 </NavLink>
             }
           </div>
         </div>
-        <div className={styles.search}>
+        <div className={`w-full`}>
           <input
-            className={styles.searchBar}
+            className={`
+              font-[Inter, Arial] 
+              text-[20px] 
+              font-medium 
+              h-10 
+              text-darkgray-100 
+              bg-darkgray-300 
+              border-darkgray-200 
+              rounded-[6px] 
+              px-[30px] 
+              grow 
+              w-full 
+              box-border`}
             placeholder="Pesquisar no blog"
             value={searchInput}
             onChange={(event) => setSearchInput(event.target.value)}

@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from './css/PostForm.module.css'
 import { supabase } from '../utils/supabase';
 
 const PostForm = () => {
@@ -25,16 +24,36 @@ const PostForm = () => {
   }
 
   return (
-    <div className={styles.formWrapper}>
-      <div className={styles.form}>
+    <div className={`flex justify-center`}>
+      <div className={`flex 
+        flex-col 
+        w-[520px] 
+        text-white 
+        font-medium 
+        bg-darkgray-300 
+        p-10 
+        border-2 
+        border-darkgray-200 
+        rounded-[5px] 
+        gap-2.5`}>
         Titulo
-        <input type="text" onChange={({ target }) => { setTitle(target.value) }} />
+        <input className={`mb-5 bg-white`} type="text" onChange={({ target }) => { setTitle(target.value) }} />
         {`Imagem de capa (insira um link válido)`}
-        <input type="text" onChange={({ target }) => { setImg(target.value) }} />
+        <input className={`mb-5 bg-white`} type="text" onChange={({ target }) => { setImg(target.value) }} />
         Conteúdo
-        <textarea onChange={({ target }) => { setContent(target.value) }} />
+        <textarea className={`mb-5 bg-white h-28`} onChange={({ target }) => { setContent(target.value) }} />
 
-        <button onClick={handlePost} disabled={loading}>Publicar</button>
+        <button className={`mt-2.5 
+          text-black
+          font-medium 
+          text-base 
+          bg-darkgray-100
+          py-[15px] 
+          px-[30px] 
+          rounded-[5px] 
+          self-end 
+          cursor-pointer
+          `} onClick={handlePost} disabled={loading}>Publicar</button>
         <>{error && `Um erro ocorreu: ${error}`}</>
       </div>
     </div>
