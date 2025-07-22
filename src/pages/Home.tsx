@@ -1,7 +1,7 @@
 import React from 'react'
-import { GlobalContext } from './GlobalPosts.js';
-import Header from './Header.js';
-import PostOnPage from './PostOnPage.js';
+import { GlobalContext } from '../components/GlobalPosts.js';
+import Header from '../components/Header.js';
+import PostOnPage from '../components/PostOnPage.js';
 
 const Home = () => {
   const { searchInput, setSearchInput } = React.useContext(GlobalContext);
