@@ -13,11 +13,11 @@
   --color-darkgray-500: ;
   --color-shadow-750: rgba(0, 0, 0, 0.75);
 
-  --animate-slideIn: slideIn 0.15s ease-out forwards;
+  --animate-slideIn: slideIn 0.3s ease-in-out forwards;
   @keyframes slideIn {
     from {
       opacity: 0;
-      transform: translateY(60px);
+      transform: translateX(-30px);
     }
     to {
       opacity: 1;

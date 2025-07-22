@@ -22,6 +22,7 @@ const PostItem = ({ post }: { post: Post }) => {
         rounded-[8px] 
         my-5 
         mx-auto 
+        animate-slideIn
         ${highlight ? 'border-peach' : ''}
         `}
       onMouseEnter={() => setHighlight(true)}

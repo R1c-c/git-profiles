@@ -78,7 +78,7 @@ const Header = ({ searchInput, setSearchInput }: { searchInput: string, setSearc
                 </>
                 :
                 <NavLink to="/login">
-                  <Button variant="secondary">
+                  <Button className='cursor-pointer w-25 h-10 text-[16px] bg-darkgray-300 text-white border-2 border-darkgray-200 hover:bg-peach' variant="secondary">
                     Login
                   </Button>
                 </NavLink>
