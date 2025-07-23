@@ -20,6 +20,7 @@ const GlobalModal = ({ post }: { post: Post | null }) => {
       onClick={handleClick}
     >
       <div className={`
+        animate-slideIn
         bg-darkgray-400 
         lg:h-[720px] 
         h-[520px]
@@ -38,10 +39,12 @@ const GlobalModal = ({ post }: { post: Post | null }) => {
         mx-10`}>
         <img className={`
           row-start-1
-          lg:row-end-3
+          lg:row-end-4
           lg:w-full 
-          lg:h-full 
-          w-[50%]
+          lg:h-full
+          lg:max-w-full
+          md:max-w-[250px] 
+          w-[35%]
           justify-self-center 
           self-center 
           bg-darkgray-450 
@@ -51,14 +54,14 @@ const GlobalModal = ({ post }: { post: Post | null }) => {
         <Like id={post.id} style={`
           lg:row-start-3 
           row-start-4
-          lg:col-span-2 
+          lg:col-start-2 
+          lg:my-5
           mx-5 
           cursor-pointer 
-          lg:justify-self-center 
-          lg:self-start
+          lg:justify-self-start 
           justify-self-end
           self-start
-          `} /><div className={`flex lg:col-start-2 col-span-full row-start-2`}>
+          `} /><div className={`flex lg:col-start-2 col-span-full lg:row-start-1 row-start-2`}>
           <h2 className={`
             font-[Space Grotesk, Helvetica] lg:text-2xl
             md:text-[14px] 
@@ -73,6 +76,7 @@ const GlobalModal = ({ post }: { post: Post | null }) => {
             font-[Inter, Arial] 
             lg:text-base
             md:text-[14px]
+            md:self-start
             text-[12px] 
             font-medium 
             text-peach 
@@ -90,13 +94,14 @@ const GlobalModal = ({ post }: { post: Post | null }) => {
           lg:text-xl 
           md:text-[16px]
           text-[14px]
-          lg:mb-0
           mx-5 
           text-darkgray-100 
           overflow-y-scroll 
           lg:h-auto
           h-[150px]
-          `}>{post.conteudo}</p>
+          whitespace-pre-wrap
+          break-words
+          `}>{post?.conteudo.replace(/\\n/g, '\n')}</p>
       </div>
     </section>
   ) : <></>;

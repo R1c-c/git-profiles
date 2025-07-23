@@ -14,11 +14,8 @@ const PostOnPage = ({ favorites }: { favorites?: boolean }) => {
     const favPostsOnScreen = favPosts.filter((post) => {
       return post.titulo.toLowerCase().includes(searchInput.toLowerCase()) || post.conteudo.toLowerCase().includes(searchInput.toLowerCase())
     })
-    if (favPostsOnScreen.length !== 0) {
-      if (favPosts.length !== 0) {
-
-        console.log(likedPostsStorage)
-
+    if (favPosts.length !== 0) {
+      if (favPostsOnScreen.length !== 0) {
         return favPosts.map((post, index) =>
           post.titulo.toLowerCase().includes(searchInput.toLowerCase()) ||
             post.conteudo.toLowerCase().includes(searchInput.toLowerCase()) ? (
@@ -26,10 +23,10 @@ const PostOnPage = ({ favorites }: { favorites?: boolean }) => {
           ) : null,
         );
       } else {
-        return <p>Sua lista de favoritos está vazia</p>
+        return <div className={`flex w-full items-center justify-center`}><p className={`text-darkgray-100 text-[18px]`}>{`Não há posts nesta lista que contenham: "${searchInput}"`}</p></div>
       }
     } else {
-      return <p>Não há posts disponíveis</p>
+      return <div className={`flex w-full items-center justify-center`}><p className={`text-darkgray-100 text-[18px]`}>Sua lista de favoritos está vazia</p></div>
     }
 
   } else {
@@ -42,7 +39,7 @@ const PostOnPage = ({ favorites }: { favorites?: boolean }) => {
         <PostItem key={index} post={post} />
       );
     } else {
-      return <p className={`text-darkgray-100 text-[18px]`}>Não há posts disponíveis</p>
+      return <div className={`flex w-full items-center justify-center`}><p className={`text-darkgray-100 text-[18px]`}>{`Não há posts disponíveis que contenham: "${searchInput}"`}</p></div>
     }
   }
 };

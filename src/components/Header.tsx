@@ -24,14 +24,15 @@
 // export default Header;
 
 import { NavLink } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+
 import { GlobalContext } from './GlobalPosts';
 import { useContext } from 'react';
+
 import Logout from './Logout';
 
 const Header = ({ searchInput, setSearchInput }: { searchInput: string, setSearchInput: React.Dispatch<React.SetStateAction<string>> }) => {
   const { session } = useContext(GlobalContext)
-
-  const linkStyle = 'no-underline text-white font-medium lg:text-2xl md:text-[20px]'
 
   return (
     <section className={`flex justify-center bg-darkgray-400 mb-16`}>
@@ -55,14 +56,18 @@ const Header = ({ searchInput, setSearchInput }: { searchInput: string, setSearc
           <div className={`flex gap-5 ml-auto`}>
             {
               session &&
-              <NavLink to="/favorites" className={`${linkStyle}`}>
-                Favorites
+              <NavLink to="/favorites">
+                <Button variant='header'>
+                  Favorites
+                </Button>
               </NavLink>
             }
             {
               session &&
-              <NavLink to="/posting" className={`${linkStyle}`}>
-                Post
+              <NavLink to="/posting">
+                <Button variant="header">
+                  Post
+                </Button>
               </NavLink>
             }
             {
@@ -72,8 +77,10 @@ const Header = ({ searchInput, setSearchInput }: { searchInput: string, setSearc
                   <Logout />
                 </>
                 :
-                <NavLink to="/login" className={`${linkStyle}`}>
-                  Login
+                <NavLink to="/login">
+                  <Button className='cursor-pointer w-25 h-10 text-[16px] bg-darkgray-300 text-white border-2 border-darkgray-200 hover:bg-peach' variant="secondary">
+                    Login
+                  </Button>
                 </NavLink>
             }
           </div>
@@ -92,7 +99,8 @@ const Header = ({ searchInput, setSearchInput }: { searchInput: string, setSearc
               px-[30px] 
               grow 
               w-full 
-              box-border`}
+              box-border
+              `}
             placeholder="Pesquisar no blog"
             value={searchInput}
             onChange={(event) => setSearchInput(event.target.value)}

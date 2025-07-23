@@ -25,7 +25,8 @@ const PostForm = () => {
 
   return (
     <div className={`flex justify-center`}>
-      <div className={`flex 
+      <div className={`
+        flex 
         flex-col 
         w-[520px] 
         text-white 
@@ -35,7 +36,9 @@ const PostForm = () => {
         border-2 
         border-darkgray-200 
         rounded-[5px] 
-        gap-2.5`}>
+        gap-2.5
+        animate-slideIn
+        `}>
         Titulo
         <input className={`mb-5 bg-white`} type="text" onChange={({ target }) => { setTitle(target.value) }} />
         {`Imagem de capa (insira um link válido)`}
