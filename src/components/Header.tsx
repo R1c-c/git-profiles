@@ -57,7 +57,7 @@ const Header = ({ searchInput, setSearchInput }: { searchInput: string, setSearc
             {
               session &&
               <NavLink to="/favorites">
-                <Button variant='secondary'>
+                <Button variant='header'>
                   Favorites
                 </Button>
               </NavLink>
@@ -65,7 +65,7 @@ const Header = ({ searchInput, setSearchInput }: { searchInput: string, setSearc
             {
               session &&
               <NavLink to="/posting">
-                <Button variant="secondary">
+                <Button variant="header">
                   Post
                 </Button>
               </NavLink>
@@ -99,7 +99,8 @@ const Header = ({ searchInput, setSearchInput }: { searchInput: string, setSearc
               px-[30px] 
               grow 
               w-full 
-              box-border`}
+              box-border
+              `}
             placeholder="Pesquisar no blog"
             value={searchInput}
             onChange={(event) => setSearchInput(event.target.value)}

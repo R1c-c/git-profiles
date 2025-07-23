@@ -16,9 +16,6 @@ const PostOnPage = ({ favorites }: { favorites?: boolean }) => {
     })
     if (favPostsOnScreen.length !== 0) {
       if (favPosts.length !== 0) {
-
-        console.log(likedPostsStorage)
-
         return favPosts.map((post, index) =>
           post.titulo.toLowerCase().includes(searchInput.toLowerCase()) ||
             post.conteudo.toLowerCase().includes(searchInput.toLowerCase()) ? (

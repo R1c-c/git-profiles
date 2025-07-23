@@ -43,8 +43,6 @@ export const GlobalPosts = ({ children }: { children: React.ReactNode }) => {
   async function getPosts() {
     const { data, error } = await supabase.from('posts').select();
 
-    console.log('data: ', data)
-
     if (error) {
       console.error('Erro ao buscar posts:', error);
       return;

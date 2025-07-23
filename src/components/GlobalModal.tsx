@@ -99,7 +99,9 @@ const GlobalModal = ({ post }: { post: Post | null }) => {
           overflow-y-scroll 
           lg:h-auto
           h-[150px]
-          `}>{post.conteudo}</p>
+          whitespace-pre-wrap
+          break-words
+          `}>{post?.conteudo.replace(/\\n/g, '\n')}</p>
       </div>
     </section>
   ) : <></>;
