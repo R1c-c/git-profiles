@@ -92,10 +92,10 @@ export const GlobalPosts = ({ children }: { children: React.ReactNode }) => {
     }}>
       <>
         {children}
-        {
+        {/* {
           activePost &&
           <GlobalModal post={activePost} />
-        }
+        } */}
       </>
     </GlobalContext.Provider>
   )

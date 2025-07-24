@@ -23,23 +23,26 @@
 
 // export default Header;
 
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router';
 import { Button } from '@/components/ui/button';
 
 import { GlobalContext } from './GlobalPosts';
 import { useContext } from 'react';
 
 import Logout from './Logout';
-import { Input } from './ui/input';
 
-const Header = ({ searchInput, setSearchInput }: { searchInput: string, setSearchInput: React.Dispatch<React.SetStateAction<string>> }) => {
-  const { session } = useContext(GlobalContext)
+const Header = () => {
+  const { session, setSearchInput } = useContext(GlobalContext)
+
+  const handleClick = () => {
+    setSearchInput('')
+  }
 
   return (
-    <section className={`flex justify-center bg-darkgray-400 mb-16`}>
+    <section className={`flex justify-center bg-darkgray-400`}>
       <div className={`flex flex-col gap-1.5 w-full max-w-[1220px] mx-3 py-4`}>
         <div className={`flex w-full text-white text-center items-center`}>
-          <NavLink to='/' end className={`
+          <NavLink to='/' end onClick={handleClick} className={`
             inline-block 
             no-underline 
             font-[Space Grotesk, Arial]
@@ -58,7 +61,7 @@ const Header = ({ searchInput, setSearchInput }: { searchInput: string, setSearc
             {
               session &&
               <NavLink to="/favorites">
-                <Button variant='header'>
+                <Button onClick={handleClick} variant='header'>
                   Favorites
                 </Button>
               </NavLink>
@@ -85,24 +88,6 @@ const Header = ({ searchInput, setSearchInput }: { searchInput: string, setSearc
                 </NavLink>
             }
           </div>
-        </div>
-        <div className={`w-full`}>
-          <Input
-            className={`
-              font-[Inter, Arial] 
-              font-medium 
-              text-white
-              h-10 
-              bg-darkgray-300 
-              border-darkgray-200 
-              rounded-[6px] 
-              px-[30px] 
-              grow 
-              `}
-            placeholder="Pesquisar no blog"
-            value={searchInput}
-            onChange={(event) => setSearchInput(event.target.value)}
-          />
         </div>
       </div>
     </section>

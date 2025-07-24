@@ -3,6 +3,7 @@ import Like from './Like.js';
 import { GlobalContext } from './GlobalPosts.js';
 import { useDate } from '../useDate.js';
 import type { Post } from '../typings/typings.js';
+import { NavLink } from 'react-router';
 
 const PostItem = ({ post }: { post: Post }) => {
   const [highlight, setHighlight] = React.useState(false);
@@ -11,8 +12,9 @@ const PostItem = ({ post }: { post: Post }) => {
   const data = useDate(post.data)
 
   return (
-    <div
-      className={`
+    <NavLink className='cursor-default' to={`/post/${post.id}`}>
+      <div
+        className={`
         bg-darkgray-400 
         w-full 
         max-w-[1216px] 
@@ -26,12 +28,12 @@ const PostItem = ({ post }: { post: Post }) => {
         break-words
         ${highlight ? 'border-peach' : ''}
         `}
-      onMouseEnter={() => setHighlight(true)}
-      onMouseLeave={() => setHighlight(false)}
-      onClick={() => { handleActivePost(post) }}
-    >
-      <div className={`grid grid-cols-2 w-auto mt-10 mx-10 mb-[30px] md:max-w-full`}>
-        <p className={`
+        onMouseEnter={() => setHighlight(true)}
+        onMouseLeave={() => setHighlight(false)}
+        onClick={() => { handleActivePost(post) }}
+      >
+        <div className={`grid grid-cols-2 w-auto mt-10 mx-10 mb-[30px] md:max-w-full`}>
+          <p className={`
           block
           font-[Inter, Arial]
           font-medium
@@ -43,11 +45,11 @@ const PostItem = ({ post }: { post: Post }) => {
           md:text-[14px]
           text-xs
           `}>
-          {data}
-        </p>
-        <Like id={post.id} style={'block text-white m-0 place-self-end cursor-pointer'} />
-      </div>
-      <h2 className={`
+            {data}
+          </p>
+          <Like id={post.id} style={'block text-white m-0 place-self-end cursor-pointer'} />
+        </div>
+        <h2 className={`
         font-[Space Grotesk, Helvetica] 
         text-2xl 
         font-medium 
@@ -56,7 +58,7 @@ const PostItem = ({ post }: { post: Post }) => {
         text-white
         md:text-xl
         `}>{post.titulo}</h2>
-      <p className={`
+        <p className={`
         font-[Inter, Arial] 
         text-[14px] 
         font-medium 
@@ -68,7 +70,8 @@ const PostItem = ({ post }: { post: Post }) => {
         md:text-base
         lg:text-xl
         `}>{extractedPreview}...</p>
-    </div>
+      </div>
+    </NavLink>
   );
 };
 export default PostItem;
