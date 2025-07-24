@@ -4,11 +4,9 @@ import Header from "../components/Header"
 import PostForm from '../components/PostForm';
 
 const Posting = () => {
-  const { searchInput, setSearchInput } = React.useContext(GlobalContext);
-
   return (
     <section>
-      <Header searchInput={searchInput} setSearchInput={setSearchInput} />
+      <Header />
       <PostForm />
     </section>
   )

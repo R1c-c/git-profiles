@@ -1,9 +1,9 @@
 export const useDate = (date: string | undefined): string => {
-    if (!date) {
-      return "Data não informada"
-    }
+  if (!date) {
+    return "Data não informada"
+  }
 
-    const extractDate = () => {
+  const extractDate = () => {
     const monthList = [
       'janeiro',
       'fevereiro',
@@ -19,7 +19,7 @@ export const useDate = (date: string | undefined): string => {
       'dezembro',
     ];
     const day = date.slice(8, 10);
-    const month = monthList[+date.slice(5, 7)];
+    const month = monthList[(+date.slice(5, 7)) - 1];
     const year = date.slice(0, 4);
     const dateData = {
       day: day,
