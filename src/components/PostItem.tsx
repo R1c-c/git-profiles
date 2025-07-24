@@ -23,6 +23,7 @@ const PostItem = ({ post }: { post: Post }) => {
         my-5 
         mx-auto 
         animate-slideIn
+        break-words
         ${highlight ? 'border-peach' : ''}
         `}
       onMouseEnter={() => setHighlight(true)}

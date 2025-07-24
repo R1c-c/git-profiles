@@ -30,6 +30,7 @@ import { GlobalContext } from './GlobalPosts';
 import { useContext } from 'react';
 
 import Logout from './Logout';
+import { Input } from './ui/input';
 
 const Header = ({ searchInput, setSearchInput }: { searchInput: string, setSearchInput: React.Dispatch<React.SetStateAction<string>> }) => {
   const { session } = useContext(GlobalContext)
@@ -86,20 +87,17 @@ const Header = ({ searchInput, setSearchInput }: { searchInput: string, setSearc
           </div>
         </div>
         <div className={`w-full`}>
-          <input
+          <Input
             className={`
               font-[Inter, Arial] 
-              text-[20px] 
               font-medium 
+              text-white
               h-10 
-              text-darkgray-100 
               bg-darkgray-300 
               border-darkgray-200 
               rounded-[6px] 
               px-[30px] 
               grow 
-              w-full 
-              box-border
               `}
             placeholder="Pesquisar no blog"
             value={searchInput}
