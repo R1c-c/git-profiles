@@ -13,10 +13,6 @@ import React from 'react';
 import Layout from './pages/Layout.js';
 
 const App = () => {
-  const { activePost } = React.useContext(GlobalContext);
-
-  console.log(activePost)
-
   return (
     <GlobalPosts>
       <BrowserRouter>
@@ -24,7 +20,6 @@ const App = () => {
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/favorites" element={<Fav />} />
-
           </Route>
           <Route path="/post/:id" element={<Post />} />
           <Route path="/login" element={<Login />} />

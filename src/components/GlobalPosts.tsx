@@ -37,7 +37,6 @@ export const GlobalPosts = ({ children }: { children: React.ReactNode }) => {
 
   }, [])
 
-
   const likedPosts = window.localStorage.getItem('likedPosts');
 
   async function getPosts() {
