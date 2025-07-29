@@ -37,7 +37,6 @@ export const GlobalPosts = ({ children }: { children: React.ReactNode }) => {
 
   }, [])
 
-
   const likedPosts = window.localStorage.getItem('likedPosts');
 
   async function getPosts() {
@@ -92,10 +91,10 @@ export const GlobalPosts = ({ children }: { children: React.ReactNode }) => {
     }}>
       <>
         {children}
-        {
+        {/* {
           activePost &&
           <GlobalModal post={activePost} />
-        }
+        } */}
       </>
     </GlobalContext.Provider>
   )

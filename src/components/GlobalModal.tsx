@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import Like from './Like.js';
-import { useDate } from '../useDate.js';
+import { formatDate } from '../formatDate.js';
 import { GlobalContext } from './GlobalPosts.js';
 import type { Post } from '../typings/typings.js';
 
 const GlobalModal = ({ post }: { post: Post | null }) => {
-  const date = useDate(post?.data)
+  const date = formatDate(post?.data)
   const { handleActivePost } = useContext(GlobalContext)
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
