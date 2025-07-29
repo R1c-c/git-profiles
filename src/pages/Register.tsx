@@ -18,30 +18,30 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 
 
-const Login = () => {
+const Register = () => {
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const loginSchema = z.object({
+  const registerSchema = z.object({
     email: z.string().email('Formato de e-mail inválido.').nonempty('E-mail é obrigatório.'),
     password: z.string().min(6, {
       message: "Senhas precisam de, no mínimo, 6 dígitos.",
     }),
   })
 
-  type LoginSchema = z.infer<typeof loginSchema>
+  type RegisterSchema = z.infer<typeof registerSchema>
 
-  const { register, handleSubmit, formState: { errors }, } = useForm<LoginSchema>({
-    resolver: zodResolver(loginSchema)
+  const { register, handleSubmit, formState: { errors }, } = useForm<RegisterSchema>({
+    resolver: zodResolver(registerSchema)
   })
 
-  const handleLogin = async (data: LoginSchema) => {
+  const handleRegister = async (data: RegisterSchema) => {
     setLoading(true)
     setError(null)
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signUp({
         email: data.email,
         password: data.password,
       })
@@ -55,54 +55,28 @@ const Login = () => {
     }
   }
 
-  // const handleRegister = async (e: React.FormEvent) => {
-  //   e.preventDefault()
-  //   setError(null)
-
-  //   setLoading(true)
-
-  //   try {
-  //     const { error, data } = await supabase.auth.signUp({
-  //       email,
-  //       password,
-  //     })
-
-  //     console.log('register data: ', data)
-
-  //     if (error) throw error
-  //     setSuccess(true)
-  //   } catch (error: unknown) {
-  //     setError(error instanceof Error ? error.message : 'An error occurred')
-  //   } finally {
-  //     setLoading(false)
-  //   }
-  // }
-
   return (
     <div className='flex justify-center mt-[220px]'>
       <Card className='w-[500px] animate-slideIn'>
         <CardAction className="self-end mr-8">
-          <NavLink to='/'>
+          <NavLink to='/login'>
             <Button className='cursor-pointer'>Voltar</Button>
           </NavLink>
         </CardAction>
         <CardHeader>
-          <CardTitle className="text-2xl">Entrar</CardTitle>
-          <CardDescription>Realize o login ou se cadastre para acessar o blog</CardDescription>
+          <CardTitle className="text-2xl">Cadastre-se</CardTitle>
+          <CardDescription>Crie uma conta para acessar o blog</CardDescription>
         </CardHeader>
         <CardContent>
 
-          <form onSubmit={handleSubmit(handleLogin)}>
+          <form onSubmit={handleSubmit(handleRegister)}>
             <Label className='mb-2' htmlFor="email">Endereço de E-mail</Label>
             <Input type='email' id='email' {...register('email')} placeholder='example@email.com' />
             {errors.email && <p className="text-[12px] text-red-500 mt-1">{errors.email.message}</p>}
             <Label className='mb-2 mt-5' htmlFor="password">Senha</Label>
             <Input type='password' id='password' {...register('password')} />
             {errors.password && <p className="text-[12px] text-red-500 mt-1">{errors.password.message}</p>}
-            <Button type='submit' disabled={loading} className='font-bold cursor-pointer mt-5'>Entrar</Button>
-            <NavLink to='/register'>
-              <Button type='button' variant='link' disabled={loading} className='font-bold cursor-pointer mt-5 ml-3'>Não tenho uma conta</Button>
-            </NavLink>
+            <Button type='submit' disabled={loading} className='font-bold cursor-pointer mt-5'>Cadastrar</Button>
           </form>
 
         </CardContent>
@@ -117,4 +91,4 @@ const Login = () => {
   );
 };
 
-export default Login
+export default Register
