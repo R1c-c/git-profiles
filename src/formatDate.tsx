@@ -1,4 +1,4 @@
-export const useDate = (date: string | undefined): string => {
+export const formatDate = (date: string | undefined): string => {
   if (!date) {
     return "Data não informada"
   }

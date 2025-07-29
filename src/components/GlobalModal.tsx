@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import Like from './Like.js';
-import { useDate } from '../useDate.js';
+import { useDate } from '../formatDate.js';
 import { GlobalContext } from './GlobalPosts.js';
 import type { Post } from '../typings/typings.js';
 

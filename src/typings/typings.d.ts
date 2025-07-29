@@ -8,6 +8,14 @@ export interface Post {
   conteudo: string;
 }
 
+export interface Comments {
+  id: number;
+  autor: string;
+  data: string;
+  comentário: string;
+  post: number;
+}
+
 export interface GlobalPostsType {
   searchInput: string;
   posts: Post[];

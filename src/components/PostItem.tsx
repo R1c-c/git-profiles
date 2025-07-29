@@ -1,7 +1,7 @@
 import React from 'react';
 import Like from './Like.js';
 import { GlobalContext } from './GlobalPosts.js';
-import { useDate } from '../useDate.js';
+import { useDate } from '../formatDate.js';
 import type { Post } from '../typings/typings.js';
 import { NavLink } from 'react-router';
 
