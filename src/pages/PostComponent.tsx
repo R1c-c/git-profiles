@@ -8,7 +8,7 @@ import { formatDate } from '@/formatDate';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/utils/supabase';
 
-const Post = () => {
+const PostComponent = () => {
   const [commentInput, setCommentInput] = React.useState<string>('')
   const [comments, setComments] = React.useState<Comments[]>([])
   const [error, setError] = React.useState<string | null>(null)
@@ -156,4 +156,4 @@ const Post = () => {
   )
 }
 
-export default Post
+export default PostComponent

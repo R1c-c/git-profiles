@@ -1,7 +1,7 @@
 import React from 'react';
 import Like from './Like.js';
 import { GlobalContext } from './GlobalPosts.js';
-import { useDate } from '../formatDate.js';
+import { formatDate } from '../formatDate.js';
 import type { Post } from '../typings/typings.js';
 import { NavLink } from 'react-router';
 
@@ -9,7 +9,7 @@ const PostItem = ({ post }: { post: Post }) => {
   const [highlight, setHighlight] = React.useState(false);
   const { handleActivePost } = React.useContext(GlobalContext);
   const extractedPreview = post.conteudo.slice(0, 80);
-  const data = useDate(post.data)
+  const data = formatDate(post.data)
 
   return (
     <NavLink className='cursor-default' to={`/post/${post.id}`}>
