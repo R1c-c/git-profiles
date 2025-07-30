@@ -24,6 +24,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false)
 
   const registerSchema = z.object({
+    username: z.string().min(4, { message: "Nomes precisam de pelo menos 4 caracteres" }).max(20, { message: "Nomes não podem ter mais do que 20 caracteres" }),
     email: z.string().email('Formato de e-mail inválido.').nonempty('E-mail é obrigatório.'),
     password: z.string().min(6, {
       message: "Senhas precisam de, no mínimo, 6 dígitos.",
@@ -41,19 +42,39 @@ const Register = () => {
     setError(null)
 
     try {
-      const { error } = await supabase.auth.signUp({
+      const { data: userAuthData, error: signUpError } = await supabase.auth.signUp({
         email: data.email,
         password: data.password,
-      })
-      if (error) throw error
-      // Update this route to redirect to an authenticated route. The user already has an active session.
-      location.href = '/'
+      });
+
+      if (signUpError) throw signUpError;
+
+      if (userAuthData.user) {
+        const { error: profileError } = await supabase
+          .from('profiles')
+          .insert([
+            {
+              id: userAuthData.user.id,
+              username: data.username,
+            },
+          ]);
+
+        if (profileError) throw profileError;
+
+        setSuccess(true);
+        alert('Cadastro realizado com sucesso! Você será redirecionado.');
+        window.location.href = '/';
+      } else if (userAuthData.session === null && userAuthData.user === null) {
+        alert('Cadastro realizado! Por favor, verifique seu e-mail para confirmar a conta.');
+        setSuccess(true);
+      }
+
     } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : 'An error occurred')
+      setError(error instanceof Error ? error.message : 'Ocorreu um erro desconhecido.');
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className='flex justify-center mt-[220px]'>
@@ -70,7 +91,10 @@ const Register = () => {
         <CardContent>
 
           <form onSubmit={handleSubmit(handleRegister)}>
-            <Label className='mb-2' htmlFor="email">Endereço de E-mail</Label>
+            <Label className='mb-2' htmlFor="name">Nome de usuário</Label>
+            <Input type='text' id='name' {...register('username')} />
+            {errors.username && <p className="text-[12px] text-red-500 mt-1">{errors.username.message}</p>}
+            <Label className='mb-2 mt-5' htmlFor="email">Endereço de E-mail</Label>
             <Input type='email' id='email' {...register('email')} placeholder='example@email.com' />
             {errors.email && <p className="text-[12px] text-red-500 mt-1">{errors.email.message}</p>}
             <Label className='mb-2 mt-5' htmlFor="password">Senha</Label>
