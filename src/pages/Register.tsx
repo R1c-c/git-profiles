@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React from "react";
 import { supabase } from "../utils/supabase";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -19,9 +19,11 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 
 const Register = () => {
-  const [error, setError] = useState<string | null>(null)
-  const [success, setSuccess] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [error, setError] = React.useState<string | null>(null)
+  const [success, setSuccess] = React.useState(false)
+  const [loading, setLoading] = React.useState(false)
+
+  const navigate = useNavigate();
 
   const registerSchema = z.object({
     username: z.string().min(4, { message: "Nomes precisam de pelo menos 4 caracteres" }).max(20, { message: "Nomes não podem ter mais do que 20 caracteres" }),

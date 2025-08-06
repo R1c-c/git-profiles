@@ -9,6 +9,7 @@ import PostComponent from './pages/PostComponent.js';
 
 import './App.css';
 import Layout from './pages/Layout.js';
+import RegisterProfile from './pages/RegisterProfile.js';
 
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/post/:id" element={<PostComponent />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/register-profile" element={<RegisterProfile />} />
           <Route path="/posting" element={<Posting />} />
         </Routes>
       </BrowserRouter>
