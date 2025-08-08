@@ -27,12 +27,36 @@ import { NavLink } from 'react-router';
 import { Button } from '@/components/ui/button';
 
 import { GlobalContext } from './GlobalPosts';
-import { useContext } from 'react';
+import React from 'react';
 
 import Logout from './Logout';
+import type { User } from '@/typings/typings';
+import { supabase } from '@/utils/supabase';
 
 const Header = () => {
-  const { session, setSearchInput } = useContext(GlobalContext)
+  const { session, setSearchInput } = React.useContext(GlobalContext)
+  const [users, setUsers] = React.useState<User[]>([]);
+
+
+  async function getUsers() {
+
+    const { data, error } = await supabase.from('profiles').select();
+
+    if (error) {
+      console.error('Erro ao buscar users:', error);
+      return;
+    }
+
+    if (data) {
+      setUsers(data as User[]);
+    }
+  }
+
+  React.useEffect(() => {
+    getUsers();
+  }, []);
+
+  const currentUser: User | undefined = users.find(user => user.id === session?.user.id);
 
   const handleClick = () => {
     setSearchInput('')
@@ -77,7 +101,7 @@ const Header = () => {
             {
               session ?
                 <>
-                  <div className={`w-[250px] font-medium text-start`}>Bem vindo, {session.user.email}</div>
+                  <div className={`w-[250px] font-medium text-start`}>Bem vindo, {currentUser?.username ? currentUser?.username : session.user.email}</div>
                   <Logout />
                 </>
                 :

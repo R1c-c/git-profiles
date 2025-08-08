@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { type Session } from '@supabase/supabase-js'
+import { type Session, type User } from '@supabase/supabase-js'
 import { supabase } from '../utils/supabase';
 
 import GlobalModal from './GlobalModal';
@@ -26,6 +26,7 @@ export const GlobalPosts = ({ children }: { children: React.ReactNode }) => {
   const [likedPostsStorage, setLikedPostsStorage] = React.useState<number[]>([]);
   const [activePost, setActivePost] = React.useState<Post | null>(null);
   const [isActive, setIsActive] = React.useState<boolean>(false);
+
 
   const [session, setSession] = useState<Session | null>(null)
   useEffect(() => {

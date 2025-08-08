@@ -1,5 +1,12 @@
 import type { Session, SupabaseClient } from "@supabase/supabase-js";
 
+export interface User {
+  id: string;
+  username: string;
+  avatar: string;
+  creation: string;
+}
+
 export interface Post {
   id: number;
   titulo: string;
