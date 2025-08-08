@@ -8,86 +8,71 @@ import {
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod"
-import React, { useEffect } from "react";
+import React from "react";
 import { supabase } from "@/utils/supabase";
 import { useNavigate } from "react-router";
 import { GlobalContext } from "@/components/GlobalPosts";
 
-// Definindo o esquema do formulário com Zod
-const profileSchema = z.object({
-  name: z.string().nonempty('Seu nome não pode estar vazio.'),
-});
-
-type ProfileSchema = z.infer<typeof profileSchema>;
-
 const RegisterProfile = () => {
   const [profilePictureFile, setProfilePictureFile] = React.useState<File | null>(null);
-  const navigate = useNavigate();
-  const { session } = React.useContext(GlobalContext); // Pegando a sessão do contexto
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ProfileSchema>({
-    resolver: zodResolver(profileSchema),
-  });
+  const navigate = useNavigate();
+
+  const profileSchema = z.object({
+    name: z.string().nonempty('Seu nome não pode estar vazio.'),
+  })
+
+  type ProfileSchema = z.infer<typeof profileSchema>
+
+  const { register, handleSubmit, formState: { errors }, } = useForm<ProfileSchema>({
+    resolver: zodResolver(profileSchema)
+  })
+
+  const { session } = React.useContext(GlobalContext)
+
 
   const handleProfile = async (data: ProfileSchema) => {
-    // Garante que o arquivo foi selecionado e a sessão existe
     if (!profilePictureFile) {
       alert("Por favor, selecione uma foto de perfil.");
       return;
     }
 
-    if (!session || !session.user.id) {
-      alert("Sessão de usuário não encontrada. Por favor, faça login novamente.");
-      navigate('/login');
-      return;
-    }
-
     try {
-      // 1. Upload da imagem para o Supabase Storage
-      const fileName = `${Date.now()}-${profilePictureFile.name}`;
-      const { error: uploadError } = await supabase.storage
-        .from('profile-pics')
-        .upload(fileName, profilePictureFile, {
-          upsert: true,
-        });
+      const fileName = `${Date.now()}-${profilePictureFile?.name}`;
 
-      if (uploadError) {
-        throw uploadError;
-      }
-
-      // 2. Obtenção da URL pública da imagem
       const { data: publicUrlData } = supabase.storage
         .from('profile-pics')
         .getPublicUrl(fileName);
 
       const profilePictureUrl = publicUrlData.publicUrl;
+      const userId = session?.user.id
 
-      // 3. Inserção dos dados do perfil no banco de dados
-      const userId = session.user.id;
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('profile-pics')
+        .upload(fileName, profilePictureFile);
+
+      if (uploadError) {
+        throw uploadError;
+      }
+
       const { error: updateError } = await supabase
         .from('profiles')
         .insert({
-          id: userId,
           username: data.name,
-          avatar: profilePictureUrl,
-        });
+          avatar: profilePictureUrl
+        })
 
       if (updateError) {
         throw updateError;
       }
 
-      alert("Perfil atualizado com sucesso!");
-      navigate('/'); // Redireciona para a página principal após o sucesso
+      navigate('/')
 
     } catch (error) {
       console.error("Erro ao atualizar o perfil:", error);
       alert("Ocorreu um erro ao atualizar o perfil.");
     }
-  };
+  }
 
   return (
     <div className='flex flex-col items-center mt-[220px] animate-zoomOutFadeIn'>
@@ -113,9 +98,9 @@ const RegisterProfile = () => {
             <Button type='submit' className='font-bold cursor-pointer mt-5 hover:bg-peach h-10 text-base'>Atualizar</Button>
           </form>
         </CardContent>
-      </Card>
+      </Card >
     </div>
-  );
-};
+  )
+}
 
-export default RegisterProfile;
+export default RegisterProfile
