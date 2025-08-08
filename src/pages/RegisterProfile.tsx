@@ -40,16 +40,17 @@ const RegisterProfile = () => {
     try {
       const fileName = `${Date.now()}-${profilePictureFile?.name}`;
 
-      const { data: publicUrlData } = supabase.storage
-        .from('profile-pics')
-        .getPublicUrl(fileName);
-
-      const profilePictureUrl = publicUrlData.publicUrl;
       const userId = session?.user.id
 
       const { data: uploadData, error: uploadError } = await supabase.storage
         .from('profile-pics')
         .upload(fileName, profilePictureFile);
+
+      const { data: publicUrlData } = supabase.storage
+        .from('profile-pics')
+        .getPublicUrl(fileName);
+
+      const profilePictureUrl = publicUrlData.publicUrl;
 
       if (uploadError) {
         throw uploadError;

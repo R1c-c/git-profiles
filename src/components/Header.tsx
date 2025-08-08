@@ -25,6 +25,7 @@
 
 import { NavLink } from 'react-router';
 import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 import { GlobalContext } from './GlobalPosts';
 import React from 'react';
@@ -101,7 +102,12 @@ const Header = () => {
             {
               session ?
                 <>
-                  <div className={`w-[250px] font-medium text-start`}>Bem vindo, {currentUser?.username ? currentUser?.username : session.user.email}</div>
+                  <div className={`w-[250px] font-medium text-start flex gap-4`}>Bem vindo, {currentUser?.username ? currentUser?.username : session.user.email}
+                    <Avatar>
+                      <AvatarImage src={currentUser?.avatar} />
+                      <AvatarFallback className='text-black'>{currentUser?.username.slice(0, 2)}</AvatarFallback>
+                    </Avatar>
+                  </div>
                   <Logout />
                 </>
                 :
