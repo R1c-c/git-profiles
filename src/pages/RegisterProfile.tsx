@@ -12,6 +12,7 @@ import React from "react";
 import { supabase } from "@/utils/supabase";
 import { useNavigate } from "react-router";
 import { GlobalContext } from "@/components/GlobalPosts";
+import uploadImage from "@/utils/uploadImage";
 
 const RegisterProfile = () => {
   const [profilePictureFile, setProfilePictureFile] = React.useState<File | null>(null);
@@ -28,9 +29,6 @@ const RegisterProfile = () => {
     resolver: zodResolver(profileSchema)
   })
 
-  const { session } = React.useContext(GlobalContext)
-
-
   const handleProfile = async (data: ProfileSchema) => {
     if (!profilePictureFile) {
       alert("Por favor, selecione uma foto de perfil.");
@@ -38,33 +36,19 @@ const RegisterProfile = () => {
     }
 
     try {
-      const fileName = `${Date.now()}-${profilePictureFile?.name}`;
+      const url = await uploadImage(profilePictureFile)
 
-      const userId = session?.user.id
+      if (url) {
+        const { error: updateError } = await supabase
+          .from('profiles')
+          .insert({
+            username: data.name,
+            avatar: url
+          })
 
-      const { data: uploadData, error: uploadError } = await supabase.storage
-        .from('profile-pics')
-        .upload(fileName, profilePictureFile);
-
-      const { data: publicUrlData } = supabase.storage
-        .from('profile-pics')
-        .getPublicUrl(fileName);
-
-      const profilePictureUrl = publicUrlData.publicUrl;
-
-      if (uploadError) {
-        throw uploadError;
-      }
-
-      const { error: updateError } = await supabase
-        .from('profiles')
-        .insert({
-          username: data.name,
-          avatar: profilePictureUrl
-        })
-
-      if (updateError) {
-        throw updateError;
+        if (updateError) {
+          throw updateError;
+        }
       }
 
       navigate('/')
