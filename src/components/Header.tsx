@@ -102,10 +102,14 @@ const Header = () => {
             {
               session ?
                 <>
-                  <div className={`w-[250px] font-medium text-start flex gap-4`}>Bem vindo, {currentUser?.username ? currentUser?.username : session.user.email}
+                  <div className={`w-[250px] font-medium text-start flex gap-4 items-center`}>{currentUser?.username ? <p>Bem vindo, {currentUser.username}</p> :
+                    <>
+                      <div className='h-[6px] w-20 rounded-2xl bg-darkgray-200 -mr-2' />
+                      <div className='h-[6px] w-15 rounded-2xl bg-darkgray-200 mr-1' />
+                    </>}
                     <Avatar>
                       <AvatarImage src={currentUser?.avatar} />
-                      <AvatarFallback className='text-black'>{currentUser?.username.slice(0, 2)}</AvatarFallback>
+                      <AvatarFallback className='text-black bg-darkgray-200'>{currentUser?.username.slice(0, 2)}</AvatarFallback>
                     </Avatar>
                   </div>
                   <Logout />
