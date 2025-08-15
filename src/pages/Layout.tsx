@@ -6,9 +6,13 @@ import { Outlet } from 'react-router'
 const Layout = () => {
   return (
     <>
-      <Header />
-      <SearchBar />
-      <Outlet />
+      <div className='relative z-10'>
+        <Header />
+      </div>
+      <div className='animate-slideDown z-0'>
+        <SearchBar />
+        <Outlet />
+      </div>
     </>
   )
 }
