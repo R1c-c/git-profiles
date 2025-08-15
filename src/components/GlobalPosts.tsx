@@ -13,6 +13,7 @@ export const GlobalContext = React.createContext<GlobalPostsType>({
   likedPostsStorage: [],
   setSearchInput: () => { },
   setPosts: () => { },
+  getPosts: async () => { return null },
   setActivePost: () => { },
   setIsActive: () => { },
   updateLikedPostsStorage: () => { },
@@ -45,12 +46,15 @@ export const GlobalPosts = ({ children }: { children: React.ReactNode }) => {
 
     if (error) {
       console.error('Erro ao buscar posts:', error);
-      return;
+      return null;
     }
 
     if (data) {
       setPosts(data as Post[]);
+      return data as Post[];
     }
+
+    return null
   }
 
   React.useEffect(() => {
@@ -84,6 +88,7 @@ export const GlobalPosts = ({ children }: { children: React.ReactNode }) => {
       likedPostsStorage,
       setSearchInput,
       setPosts,
+      getPosts,
       setActivePost,
       setIsActive,
       updateLikedPostsStorage,

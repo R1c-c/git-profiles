@@ -31,6 +31,7 @@ export interface GlobalPostsType {
   likedPostsStorage: number[];
   setSearchInput: React.Dispatch<React.SetStateAction<string>>;
   setPosts: React.Dispatch<React.SetStateAction<Post[]>>;
+  getPosts: () => Promise<Post[] | null>;
   setActivePost: React.Dispatch<React.SetStateAction<Post | null>>;
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
   updateLikedPostsStorage: (newlist: number[]) => void;

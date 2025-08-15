@@ -1,5 +1,7 @@
 import React from 'react'
 import { supabase } from '../utils/supabase';
+import { useNavigate } from 'react-router';
+import { GlobalContext, GlobalPosts } from './GlobalPosts';
 
 const PostForm = () => {
   const [title, setTitle] = React.useState<string>('');
@@ -7,6 +9,9 @@ const PostForm = () => {
   const [content, setContent] = React.useState<string>('');
   const [error, setError] = React.useState<string | null>(null)
   const [loading, setLoading] = React.useState<boolean>(false)
+
+  const navigate = useNavigate();
+  const { setPosts, getPosts } = React.useContext(GlobalContext)
 
   const handlePost = async (e: React.MouseEvent) => {
     e.preventDefault()
@@ -16,6 +21,11 @@ const PostForm = () => {
     try {
       const { error } = await supabase.from('posts').insert({ titulo: title, imagem_capa: img, conteudo: content })
       if (error) throw error
+      const posts = await getPosts()
+      if (posts !== null) {
+        setPosts(posts)
+      }
+      navigate('/')
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : 'An error occurred')
     } finally {
@@ -40,11 +50,11 @@ const PostForm = () => {
         animate-slideIn
         `}>
         Titulo
-        <input className={`mb-5 bg-white`} type="text" onChange={({ target }) => { setTitle(target.value) }} />
+        <input className={`mb-5 bg-white text-black`} type="text" onChange={({ target }) => { setTitle(target.value) }} />
         {`Imagem de capa (insira um link válido)`}
-        <input className={`mb-5 bg-white`} type="text" onChange={({ target }) => { setImg(target.value) }} />
+        <input className={`mb-5 bg-white text-black`} type="text" onChange={({ target }) => { setImg(target.value) }} />
         Conteúdo
-        <textarea className={`mb-5 bg-white h-28`} onChange={({ target }) => { setContent(target.value) }} />
+        <textarea className={`mb-5 bg-white h-28 text-black`} onChange={({ target }) => { setContent(target.value) }} />
 
         <button className={`mt-2.5 
           text-black
