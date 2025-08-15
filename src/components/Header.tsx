@@ -25,7 +25,19 @@
 
 import { NavLink } from 'react-router';
 import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 import { GlobalContext } from './GlobalPosts';
 import React from 'react';
@@ -102,17 +114,35 @@ const Header = () => {
             {
               session ?
                 <>
-                  <div className={`w-[250px] font-medium text-start flex gap-4 items-center`}>{currentUser?.username ? <p>Bem vindo, {currentUser.username}</p> :
-                    <>
+                  {currentUser?.username ?
+                    <DropdownMenu>
+                      <div className='w-[250px] font-medium text-start flex gap-4 items-center'>
+                        <p>Bem vindo, </p>
+                        <DropdownMenuTrigger className='flex items-center -ml-2 gap-4 cursor-pointer'>
+                          <p>{currentUser.username}</p>
+                          <Avatar>
+                            <AvatarImage src={currentUser?.avatar} />
+                          </Avatar>
+                        </DropdownMenuTrigger>
+                      </div>
+                      <DropdownMenuContent className='text-white bg-darkgray-400 border-darkgray-200'>
+                        <DropdownMenuLabel className='font-bold'>Conta</DropdownMenuLabel>
+                        <DropdownMenuSeparator className='bg-darkgray-200' />
+                        <DropdownMenuItem className='cursor-pointer' variant='profile'>Perfil</DropdownMenuItem>
+                        <DropdownMenuItem className='cursor-pointer' variant='profile'>Postagens</DropdownMenuItem>
+                        <DropdownMenuSeparator className='bg-darkgray-200' />
+                        <DropdownMenuItem className='cursor-pointer' variant='profile'><Logout /></DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu> :
+                    <div className='w-[250px] font-medium text-start flex gap-4 items-center'>
                       <div className='h-[6px] w-20 rounded-2xl bg-darkgray-200 -mr-2' />
                       <div className='h-[6px] w-15 rounded-2xl bg-darkgray-200 mr-1' />
-                    </>}
-                    <Avatar>
-                      <AvatarImage src={currentUser?.avatar} />
-                      <AvatarFallback className='text-black bg-darkgray-200'>{currentUser?.username.slice(0, 2)}</AvatarFallback>
-                    </Avatar>
-                  </div>
-                  <Logout />
+
+                      <Avatar>
+                        <AvatarImage src={'dummy'} />
+                        <AvatarFallback className='text-black bg-darkgray-200'>{currentUser?.username.slice(0, 2)}</AvatarFallback>
+                      </Avatar>
+                    </div>}
                 </>
                 :
                 <NavLink to="/login">
